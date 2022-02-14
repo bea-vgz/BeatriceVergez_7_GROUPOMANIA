@@ -1,6 +1,7 @@
 # BeatriceVergez_7_GROUPOMANIA (07/11/21)
 
 ***Social Network // Créer un réseau social d'entreprise // P7_Openclassrooms***
+
 Il consiste à construire un réseau social interne pour les employés de la société Groupomania. La plateforme doit permettre des échanges entre les utilisateurs sur le modèle d'autres sites comme 9GAG ou encore Reddit.
 
 __
