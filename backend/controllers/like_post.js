@@ -2,7 +2,6 @@ const { Like_post } = require('../models/index');
 const { Dislike_post } = require('../models/index');
 const { User } = require('../models/index');
 const { Post } = require('../models/index');
-const { Sequelize } = require("sequelize");
 
 // Création d'un like post :
 exports.likePost = async (req, res, next) => {
