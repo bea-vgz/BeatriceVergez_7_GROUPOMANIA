@@ -50,7 +50,7 @@
         <button
           @click="likeOrNotPost"
           class="react-btn footer-btn "
-          aria-label="Liker ou disliker"
+          aria-label="Liker"
         >
           <svg
             v-if="likeThisPost"
