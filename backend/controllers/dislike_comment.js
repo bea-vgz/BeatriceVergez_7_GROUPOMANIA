@@ -68,7 +68,7 @@ exports.getAllDislikesOneComment = async (req, res, next) => {
 exports.getDislikeOnOneComment = async (req, res, next) => {
   try {
     const existDislike = await Dislike_comment.findOne(
-      { where: { CommentId: req.params.commentId },
+      { where: { CommentId: req.params.commentId, UserId: req.user },
       include: { model: User }
     })
     res.status(200).json({ dislike: existDislike ? true : false })

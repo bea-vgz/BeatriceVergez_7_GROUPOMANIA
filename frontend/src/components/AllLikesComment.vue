@@ -25,7 +25,7 @@
         @click="getAllDislikes"
         v-if="dislikesCount > 0"
         class="like-btn d-flex align-items-center my-2 text-left"
-        aria-label="Afficher les likes"
+        aria-label="Afficher les dislikes"
       >
       <div
         class="svg-container-dislike d-flex justify-content-center align-items-center"

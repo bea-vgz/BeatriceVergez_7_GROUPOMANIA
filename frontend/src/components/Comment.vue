@@ -44,16 +44,16 @@
       </p>
       <div class="d-flex justify-content-around">
         <div class="button-dis-like d-flex" v-if="comment.Like_comments">
-            <AllLikesComment
-            :post="post"
-            :comment="comment" 
-            :likesCount="comment.Like_comments.length"
-            />
-          </div>
+          <AllLikesComment
+          :post="post"
+          :comment="comment" 
+          :likesCount="comment.Like_comments.length"
+          />
+        </div>
         <button
           @click="likeOrNotComment"
           class="react-btn"
-          aria-label="Liker ou disliker"
+          aria-label="Liker"
         >
           <div v-if="likeThisComment">
             <path
@@ -65,7 +65,6 @@
               fill="currentColor"
             />
           </div>
-
           <span :class="`like-comment ${likeThisComment ? 'blue' : ''}`"> J'aime</span>
         </button>
         <div class="button-dis-like d-flex" v-if="comment.Dislike_comments">
@@ -77,7 +76,7 @@
         </div>
         <button
           @click="dislikeOrNotComment"
-          class="react-btn footer-btn "
+          class="react-btn"
           aria-label="Disliker"
         >
           <div v-if="dislikeThisComment">
