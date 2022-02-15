@@ -22,4 +22,4 @@ __
 
 __
 
-**MySQL :** BDD installé en local
+**MySQL :** BDD installée en local
