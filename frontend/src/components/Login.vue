@@ -1,5 +1,4 @@
 <template>
-
   <div id="loginUser">
     <section class="container_intro">
       <div class="identity">
@@ -43,7 +42,6 @@
 <script>
 import router from "../router";
 import User from '../models/user'
-
 export default {
   name: 'Login',
   computed: {

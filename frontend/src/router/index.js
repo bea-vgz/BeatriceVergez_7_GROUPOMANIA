@@ -48,14 +48,6 @@ const routes = [
     component: () => import('../views/ProfilUser.vue'),
     meta: { title:'Groupomania - profil collègue' }
   },
-
-  // Route Error404 
-  {
-    path: '/error404',
-    name: 'Error404',
-    component: () => import('../components/Error404.vue'),
-    meta: { title:'Groupomania - Error404' }
-  }
 ] 
 
 const router = new VueRouter({
