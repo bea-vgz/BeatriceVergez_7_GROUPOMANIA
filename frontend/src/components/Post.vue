@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div v-if="!post">
-      <Error404 />
-    </div>
     <div class="card-post">
       <div class="user">
         <div class="UserAvatar" v-if="post.User">
@@ -116,7 +113,6 @@
 </template>
 
 <script>
-import Error404 from '../components/Error404.vue';
 import LikePostService from "../service/like_post.resource";
 import DislikePostService from "../service/dislike_post.resource";
 import AllComments from "../components/AllComments.vue";
@@ -138,7 +134,6 @@ export default {
     AllComments,
     AllLikesPost,
     ModifyPost,
-    Error404
   },
   computed: {
     currentUser() {

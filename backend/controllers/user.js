@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt'); //package de cryptage pour les mdp
 const jwt = require('jsonwebtoken');
 const { User } = require('../models/index');
 const { Post } = require('../models/index');
+const { Comment } = require('../models/index');
 const Sequelize = require('sequelize');
 const fs = require('fs');
 
@@ -133,7 +134,14 @@ exports.getAllUsers = (req, res, next) => {
 // Afficher/Récupérer un user
 exports.getOneUser = (req, res, next) => {
     User.findOne({ where: { id: req.params.id },
-        include: { model: Post },
+        include: [
+            { 
+              model: Post,
+            },
+            {
+              model: Comment,
+            }
+          ],
     })
       .then(user => res.status(200).json(user))
       .catch(error => res.status(400).json({ error }));

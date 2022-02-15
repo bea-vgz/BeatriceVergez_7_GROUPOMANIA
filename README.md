@@ -19,3 +19,7 @@ __
 __
 
 **Backend :** cd backend / npm install / nodemon server
+
+__
+
+**MySQL :** BDD installée en local

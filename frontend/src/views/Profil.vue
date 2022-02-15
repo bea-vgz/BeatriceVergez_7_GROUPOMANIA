@@ -5,7 +5,7 @@
     <div class="container_account">
       <AsideProfil />
       <div class="info-profil justify-content-center align-items-center flex-column">
-        <b-col cols="12" lg="12" class="align-items-center">
+        <b-col cols="12" class="align-items-center">
           <div class="infoUser bg-white">
             <h1><strong>Mon profil</strong> </h1>
             <div class="userInfo">
