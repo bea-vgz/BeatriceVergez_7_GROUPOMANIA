@@ -22,8 +22,5 @@ __
 
 __
 
-<<<<<<< HEAD
 **MySQL :** BDD installée en local
-=======
-**MySQL :** BDD installée en local
->>>>>>> 769c43e303cd1a3e4b5e7fd6781581999436aa9c
+
