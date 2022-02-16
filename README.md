@@ -14,11 +14,17 @@ __
 
 __
 
-**Frontend :** cd frontend / npm install / npm run serve
+**Frontend :** 
+****Application VueJS & Framework Bootstrap-Vue
+
+cd frontend / npm install / npm run serve
 
 __
 
-**Backend :** cd backend / npm install / nodemon server
+**Backend :** 
+***NodeJS, Application Express
+
+cd backend / npm install / nodemon server
 
 __
 
