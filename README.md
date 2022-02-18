@@ -14,13 +14,22 @@ __
 
 __
 
-**Frontend :** cd frontend / npm install / npm run serve
+**Frontend :** 
+****Application VueJS & Framework Bootstrap-Vue****
+
+cd frontend / npm install / npm run serve
 
 __
 
-**Backend :** cd backend / npm install / nodemon server
+**Backend :** 
+***NodeJS, Application Express***
+
+cd backend / npm install / nodemon server
 
 __
 
-**MySQL :** BDD installée en local
+**BDD MySQL :** 
+***Générée par Sequelize ORM***
+
+BDD installée en local
 
