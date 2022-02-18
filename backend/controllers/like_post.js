@@ -7,10 +7,10 @@ const { Post } = require('../models/index');
 exports.likePost = async (req, res, next) => {
   try {
     const existLike = await Like_post.findOne({ 
-      where: { UserId: req.user, PostId: req.params.postId } 
+      where: { UserId: req.user.id, PostId: req.params.postId } 
     });
     const existDislike = await Dislike_post.findOne({ 
-      where: { UserId: req.user, PostId: req.params.postId } 
+      where: { UserId: req.user.id, PostId: req.params.postId } 
     });
     if (existLike && !existDislike) {
       await existLike.destroy()
@@ -27,7 +27,7 @@ exports.likePost = async (req, res, next) => {
       })
     } else if(!existLike && !existDislike) {
       Like_post.create({
-        UserId: req.user,
+        UserId: req.user.id,
         PostId: req.params.postId,
       })
       .then( async() => {

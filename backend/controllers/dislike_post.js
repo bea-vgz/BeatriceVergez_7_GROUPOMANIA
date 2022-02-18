@@ -7,10 +7,10 @@ const { Post } = require('../models/index');
 exports.dislikePost = async (req, res, next) => {
   try {
     const existDislike = await Dislike_post.findOne({ 
-      where: { UserId: req.user, PostId: req.params.postId } 
+      where: { UserId: req.user.id, PostId: req.params.postId } 
     });
     const existLike = await Like_post.findOne({ 
-      where: { UserId: req.user, PostId: req.params.postId } 
+      where: { UserId: req.user.id, PostId: req.params.postId } 
     });
     if (existDislike && !existLike) {
       await existDislike.destroy()
@@ -27,7 +27,7 @@ exports.dislikePost = async (req, res, next) => {
       })
     } else if (!existDislike && !existLike) {
       Dislike_post.create({
-        UserId: req.user,
+        UserId: req.user.id,
         PostId: req.params.postId,
       })
       .then( async () => {
@@ -68,7 +68,7 @@ exports.getAllDislikesOnePost = async (req, res, next) => {
 exports.getDislikeOnOnePost = async (req, res, next) => {
   try {
     const existDislike = await Dislike_post.findOne(
-      { where: { PostId: req.params.postId, UserId: req.user },
+      { where: { PostId: req.params.postId, UserId: req.user.id },
       include: { model: User }
     })
     res.status(200).json({ dislike: existDislike ? true : false })

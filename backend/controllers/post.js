@@ -11,7 +11,7 @@ exports.createPost = async (req, res, next) => {
   try { 
     let post = await Post.create({
     ...req.body,
-    UserId: req.user,
+    UserId: req.user.id,
     image: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`, //On génère l'url de l'image
   })
   post = await Post.findOne({ 

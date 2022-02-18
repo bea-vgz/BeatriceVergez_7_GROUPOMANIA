@@ -144,7 +144,7 @@ exports.getOneUser = (req, res, next) => {
 
 // Afficher/Récupérer le currentUser
 exports.getMe = (req, res) => {
-    User.findByPk(req.user.id)
+    User.findByPk(req.params.userId)
     .then((user) => res.send(req.user))
     .catch(error => res.status(400).json({ error }));
 };

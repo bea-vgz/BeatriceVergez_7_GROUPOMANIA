@@ -8,7 +8,7 @@ exports.createComment = async (req, res, next) => {
     try { 
       let comment = await Comment.create({
       ...req.body,
-      UserId: req.user,
+      UserId: req.user.id,
       PostId: req.params.postId
     })
     comment = await Comment.findOne({

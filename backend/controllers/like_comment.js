@@ -7,10 +7,10 @@ const { Comment } = require('../models/index');
 exports.likeComment = async (req, res, next) => {
   try {
     const existLike = await Like_comment.findOne({ 
-      where: { UserId: req.user, CommentId: req.params.commentId } 
+      where: { UserId: req.user.id, CommentId: req.params.commentId } 
     });
     const existDislike = await Dislike_comment.findOne({ 
-      where: { UserId: req.user, CommentId: req.params.commentId } 
+      where: { UserId: req.user.id, CommentId: req.params.commentId } 
     });
     if (existLike && !existDislike) {
       await existLike.destroy()
@@ -27,7 +27,7 @@ exports.likeComment = async (req, res, next) => {
       })
     } else if(!existLike && !existDislike){
       Like_comment.create({
-        UserId: req.user,
+        UserId: req.user.id,
         CommentId: req.params.commentId,
       })
       .then( async() => {
@@ -68,7 +68,7 @@ exports.getAllLikesOneComment = async (req, res, next) => {
 exports.getLikeOnOneComment = async (req, res, next) => {
   try {
     const existLike = await Like_comment.findOne(
-      { where: { CommentId: req.params.commentId, UserId: req.user },
+      { where: { CommentId: req.params.commentId, UserId: req.user.id },
       include: { model: User }
     })
     res.status(200).json({ like: existLike ? true : false })
