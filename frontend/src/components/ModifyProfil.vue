@@ -132,10 +132,10 @@ export default {
           bio: this.currentUser.bio
         }
       }
-      const userId = this.currentUser.userId
-      AuthService.modifyUser(userId, user)
-        .then(() => {
-          this.currentUser.userId
+      const id = this.currentUser.id
+      AuthService.modifyUser(id, user)
+          .then(() => {
+          this.currentUser.userId = id
           this.displayNotification('User modifié !')
           router.push('/home');
         })

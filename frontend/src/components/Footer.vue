@@ -2,7 +2,8 @@
     <footer>
       <!-- Copyright -->
       <div class="footer">
-        © 2022 Copyright – Groupomania
+        © 2022 Copyright – Groupomania - 
+        <router-link class="mentions" to='/mentions'> Mentions légales </router-link>
       </div>
       <!-- Copyright -->
     </footer>
@@ -22,5 +23,13 @@ export default {
   text-align: center;
   color : #747474;
   background-color:#ffffff
+}
+.mentions {
+  text-decoration: none;
+  color: #747474;
+  font-weight: bold; 
+}
+.mentions:hover {
+  color: #e22600;
 }
 </style>

@@ -15,10 +15,10 @@
         <div class="notifUser">
           <div class="menu-item" @click="isOpen = !isOpen" >
             <button class="accessUser">
-              <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
+              <img v-if="user" :src="user.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
               <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar icone" alt="Avatar"/>
-              <span v-if="currentUser" class="username">
-                <strong style="text-transform: uppercase"> {{ currentUser.username }} </strong>
+              <span v-if="user" class="username">
+                <strong style="text-transform: uppercase"> {{ user.username }} </strong>
               </span>
             </button>
             <transition name="fade" apear>
@@ -56,14 +56,6 @@ export default {
   components: {
     UserSearch,
     MenuBurger
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    }
   },
   methods: {
     ...mapActions(['displayNotification']),

@@ -9,11 +9,11 @@
           <div class="infoUser bg-white">
             <h1><strong>Mon profil</strong> </h1>
             <div class="userInfo">
-              <p v-if="currentUser"><strong>Pseudo : </strong>{{ currentUser.username }}</p>
-              <p v-if="currentUser"><strong>Email : </strong>{{ currentUser.email }}</p>
-              <p v-if="currentUser"><strong>Biographie :</strong>{{ currentUser.bio }}</p>
-              <p v-if="currentUser"><strong>Identifiant :</strong> {{ currentUser.userId }}</p>
-              <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
+              <p><strong>Pseudo : </strong>{{ user.username }}</p>
+              <p><strong>Email : </strong>{{ user.email }}</p>
+              <p><strong>Biographie :</strong>{{ user.bio }}</p>
+              <p><strong>Identifiant :</strong> {{ user.id }}</p>
+              <div v-if="user.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
             </div>
             <div class="line mb-3"></div>
             <a title="Modifier mon profil" @click="displayModal" class="icone">
@@ -24,7 +24,7 @@
           </div>
         </b-col>
         <b-col col-lg="12" class="align-items-center">
-          <AllPosts :userId="currentUser.userId" />
+          <AllPosts :userId="user.userId" />
         </b-col>
       </div>
     </div>
@@ -40,7 +40,8 @@ import Header from '@/components/Header.vue';
 import modifyProfil from '@/components/ModifyProfil.vue';
 import AllPosts from "../components/AllPosts.vue";
 import { mapActions } from 'vuex';
-import AsideProfil from "../components/AsideProfil.vue"
+import AsideProfil from "../components/AsideProfil.vue";
+import AuthService from "../service/auth.resource"
 export default {
   name: "Profil",
   components: {
@@ -50,19 +51,17 @@ export default {
     AllPosts,
     AsideProfil
   },
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
+  },
   data() {
     return {
       modifyProfil: false,
       image:'',
-      user:'',
+      user:{},
       posts: [],
       post: ''
     }
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
   },
   methods: {
     ...mapActions(['displayNotification']),

@@ -68,11 +68,14 @@ exports.getAllLikesOnePost = async (req, res, next) => {
 exports.getLikeOnOnePost = async (req, res, next) => {
   try {
     const existLike = await Like_post.findOne(
-      { where: { PostId: req.params.postId, UserId: req.user },
+      { where: { PostId: req.params.postId, UserId: req.user.id },
       include: { model: User }
     })
     res.status(200).json({ like: existLike ? true : false })
   } catch (error) {
+    console.log(error)
+
+
     res.status(400).json({ error })
   }
 }

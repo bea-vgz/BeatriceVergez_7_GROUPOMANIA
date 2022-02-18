@@ -1,13 +1,21 @@
 import AuthService from '../service/auth.resource';
 
-const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
-  ? { status: { loggedIn: true }, user }
-  : { status: { loggedIn: false }, user: null };
-
-export const auth = {
-  namespaced: true,
-  state: initialState,
+  export const auth = {
+    namespaced: true,
+    state: {
+      statut: '',
+      user: {},
+      userInfos: {
+        username: '',
+        email: '',
+        bio: '',
+        photoProfil: '',
+        isAdmin: '',
+      },
+      users:[],
+      token: null,
+      isAdmin: false,
+    },
   actions: {
     login({ commit }, user) {
       return AuthService.login(user)
@@ -80,25 +88,21 @@ export const auth = {
 
   mutations: {
     loginSuccess(state, user) {
-      state.status.loggedIn = true;
       state.user = user;
     },
     loginFailure(state) {
-      state.status.loggedIn = false;
       state.user = null;
     },
     logout(state) {
-      state.status.loggedIn = false;
       state.user = null;
     },
-    registerSuccess(state) {
-      state.status.loggedIn = false;
+    registerSuccess(state, user) {
+      state.user = user;
     },
     registerFailure(state) {
-      state.status.loggedIn = false;
+      state.user = null;
     },
     deleteSuccess(state) {
-      state.status.loggedIn= false
       state.user = null
     },
     deleteFailure(state, message) {

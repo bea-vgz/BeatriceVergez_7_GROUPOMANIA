@@ -2,10 +2,10 @@
     <aside class="profil_account bg-white sidebar">
         <div class="sidebar__widget">
           <div class="contanier_presentation bg-white border-b py-8">
-            <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
+            <img v-if="user" :src="user.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
             <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar" alt="Avatar" />
-            <h1 v-if="currentUser" class="username">{{ currentUser.username }}</h1>
-            <p v-if="currentUser"><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
+            <h1 v-if="user" class="username">{{ user.username }}</h1>
+            <p v-if="user"><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
           </div>
           <div class="optionsProfil bg-white">
             <div class="option"> 
@@ -39,11 +39,6 @@ import router from "../router";
 import ConfirmDialogue from "../components/ConfirmDialogue.vue"
 export default {
     name: 'AsideProfil',
-    computed: {
-      currentUser() {
-        return this.$store.state.auth.user;
-      }
-    },
     data() {
       return {
         user: {},

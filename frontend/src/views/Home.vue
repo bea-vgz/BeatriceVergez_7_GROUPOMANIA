@@ -11,8 +11,8 @@
     <div class="wrapper__text text-align">
       <h1 class="text text--highlight animate-delay-3">Bienvenue sur votre fil d'actualité <br /></h1>
     </div>
-    <div  v-if="currentUser" class="wrapper__text text-align">
-      <h1 class="text text--highlight animate-delay-6">{{ currentUser.username }} ! 😁</h1>
+    <div v-if="user !== null" class="wrapper__text text-align">
+      <h1 class="text text--highlight animate-delay-6">{{ user.username }} ! 😁</h1>
     </div>
     </div>
     
@@ -34,23 +34,23 @@ import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import CreatePost from '../components/CreatePost.vue';
 import AllPosts from '../components/AllPosts.vue';
+import AuthService from "../service/auth.resource"
 export default {
   name: 'HomePage',
   data() {
 		return {
       posts: [],
+      user: {},
 		};
 	},
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
+  },
   components: {
     Header,
     Footer,
     CreatePost,
     AllPosts,
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
   },
 }
 </script>

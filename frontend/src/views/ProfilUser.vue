@@ -12,7 +12,7 @@
               <p><strong>Email : </strong>{{ user.email }}</p>
               <p><strong>Biographie :</strong>{{ user.bio }}</p>
               <AdminDeleteUser
-                v-if="currentUser.isAdmin"
+                v-if="user.isAdmin"
                 :user="user"
               />
             </div>
@@ -48,11 +48,6 @@ export default {
     Footer,
     AllPosts,
     AdminDeleteUser
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
   },
   watch: {
     $route (to, from) {

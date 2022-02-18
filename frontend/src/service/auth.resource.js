@@ -1,16 +1,22 @@
 import resource from './resource'
+import Cookies from 'js-cookie'
 import authHeader from './auth.header'
 
+export function userIsLogged() {
+  return !!Cookies.get('userToken_groupomania');
+}
+
 class AuthService {
+
     signup(user) {
-        return resource.post('/users/signup', {
-            username: user.username,
-            email: user.email + '@groupomania.com',
-            password: user.password,
-            bio: user.bio,
-            photoProfil: user.photoProfil,
-            isAdmin: 0,
-        })
+      return resource.post('/users/signup', {
+        username: user.username,
+        email: user.email + '@groupomania.com',
+        password: user.password,
+        bio: user.bio,
+        photoProfil: user.photoProfil,
+        isAdmin: 0,
+      })
     }
 
     login(user) {
@@ -19,26 +25,30 @@ class AuthService {
         password: user.password,
       })
       .then(response => {
-        if (response.data.token) {
-          localStorage.setItem('user', JSON.stringify(response.data));
+        if (response) {
+          return response.data;
         }
-        return response.data;
       });
     }
 
     logout() {
-      localStorage.removeItem('user')
+      Cookies.remove('userToken_groupomania', { path: '' })
     }
 
     deleteUser(payload) {
       const id = payload
-      return resource.delete(`/users/${id}`, { headers: authHeader() })
+      return resource.delete(`/users/${id}`, { 
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + Cookies.get('userToken_groupomania'),
+        } 
+      })
     }
 
     modifyUser(userId, user) {
       return resource.put(`/users/${userId}`, user, { headers: authHeader() })
       .then(response => {
-        console.log(response)
+        return response.data
       });
     }
 
@@ -50,12 +60,17 @@ class AuthService {
     }
 
     getAllUsers(value) {
-      return resource.get(`/users?search=${value}`, { headers: authHeader() });
+      return resource.get(`/users?search=${value}`, { headers: authHeader() })
     }
 
     getOneUser(id){
       return resource.get(`/users/${id}`, { headers: authHeader() })
     }
+
+    getCurrentUser(){
+      return resource.get(`/users/me`, { headers: authHeader() })
+      .then(response => { return response.data })
+  }
 }
 
 export default new AuthService();

@@ -41,25 +41,29 @@
 
 <script>
 import router from "../router";
-import User from '../models/user'
+import Cookies from 'js-cookie'
 export default {
   name: 'Login',
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    }
-  },
+  
   data() {
     return {
-      user: new User('', ''),
+      user: {
+        email:'',
+        password:'',
+      },
       show: false
     }
   },
   methods: {
-    login () {
+    login() {
+      const user = {
+        email: this.user.email,
+        password: this.user.password,
+      };
       if (this.user.email && this.user.password) {
-        this.$store.dispatch('auth/login', this.user)
-        .then(() => {
+        this.$store.dispatch('auth/login', user)
+        .then(user => {
+          Cookies.set('userToken_groupomania', user.token, { expires: 1 });
           router.push('/home');
         },
         error => {

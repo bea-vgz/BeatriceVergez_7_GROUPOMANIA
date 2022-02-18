@@ -32,8 +32,8 @@
         <EditButton
           customClass="comment-button"
           classCollapse="comment-btn-collapsed"
-          :isCreator="comment.UserId == currentUser.userId"
-          :isAdmin="currentUser.isAdmin"
+          :isCreator="comment.UserId == user.id"
+          :isAdmin="user.isAdmin"
           @clickedEditButton="startEditing"
           @onDelete="deleteComment"
           modifyText="Modifier"
@@ -109,11 +109,6 @@ export default {
   components: {
     EditButton,
     AllLikesComment
-  },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
   },
    data () {
     return {

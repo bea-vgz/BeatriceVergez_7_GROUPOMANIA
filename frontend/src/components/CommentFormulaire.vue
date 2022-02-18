@@ -4,7 +4,7 @@
       <div>
         <router-link :to="{ name: 'Profil' }" >
           <div class="UserAvatar">
-            <img :src="currentUser.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
+            <img :src="user.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
           </div>
         </router-link>
       </div>
@@ -36,11 +36,6 @@ export default {
     };
   },
   props: ['post'],
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-  },
   methods: {
     ...mapActions(['displayNotification']),
     createComment(){

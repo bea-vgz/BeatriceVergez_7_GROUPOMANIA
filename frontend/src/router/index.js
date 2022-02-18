@@ -48,6 +48,14 @@ const routes = [
     component: () => import('../views/ProfilUser.vue'),
     meta: { title:'Groupomania - profil collègue' }
   },
+
+  // Route Mentions légales
+  {
+    path: '/mentions',
+    name: 'MentionsLégales',
+    component: () => import('../views/MentionsLégales.vue'),
+    meta: { title:'Groupomania - mentions légales' }
+  },
 ] 
 
 const router = new VueRouter({

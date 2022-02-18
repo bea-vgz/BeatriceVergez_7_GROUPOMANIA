@@ -3,8 +3,8 @@
     <b-col cols="12" lg="6" class="align-items-center">
       <div id="PostFormulaire">
         <form class="container_post border-0 bg-white">
-          <router-link to="/profil" v-if="currentUser" class="container_user bg-white">
-            <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar" alt="Avatar" ref="file" />
+          <router-link to="/profil" v-if="user" class="container_user bg-white">
+            <img v-if="user" :src="user.photoProfil"  class="avatar" alt="Avatar" ref="file" />
             <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar" alt="Avatar" ref="file" />
           </router-link>
           <div class="textarea_form">
@@ -12,7 +12,7 @@
               :value="value"
               @input="updateContent"
               id="content"
-              :placeholder="`Quoi de beau, ${currentUser.username} ?`"
+              :placeholder="`Quoi de beau, ${user.username} ?`"
               aria-label="Écrire une publication"
               class="input"
             ></b-form-textarea>
@@ -79,7 +79,8 @@ export default {
   name: 'PostFormulaire',
   data () {
     return {
-      file: this.image
+      file: this.image,
+      user: []
     };
   },
   watch: {
@@ -88,11 +89,6 @@ export default {
     }
   },
   props: ['value','image', 'onFormSubmit', 'isCreating'],
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    },
-  },
   methods: {
     onFileSelected(event) {
       this.file = URL.createObjectURL(event.target.files[0])

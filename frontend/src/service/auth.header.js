@@ -1,11 +1,15 @@
-export default function authHeader() {
-  const user = JSON.parse(localStorage.getItem('user'));
+import Cookies from 'js-cookie'
 
-  if (user && user.token) {
-    return { Authorization: 'Bearer ' + user.token };
-  } else {
-    return {};
-  }
+export default function authHeader() {
+    const userToken_groupomania = Cookies.get('userToken_groupomania')
+    if (userToken_groupomania) {
+       return {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + `${userToken_groupomania}`
+        }
+    } else {
+        return {};
+    }
 }
 
 

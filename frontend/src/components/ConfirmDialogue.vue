@@ -30,11 +30,6 @@ export default {
         'post',
         'userId'
     ],
-    computed: {
-      currentUser() {
-        return this.$store.state.auth.user;
-      }
-    },
     methods: {
         ...mapActions(['displayNotification']),
 
@@ -67,7 +62,7 @@ export default {
             else if(this.action == "deleteAccountUser") {
                 AuthService.deleteUser(`${this.userId}`)
                 .then(() => {
-                    this.currentUser.isAdmin
+                    this.user.isAdmin
                     this.displayNotification('Compte supprimé avec succès!')
                     router.push('/home');
                 },

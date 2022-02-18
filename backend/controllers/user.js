@@ -5,6 +5,7 @@ const { Post } = require('../models/index');
 const { Comment } = require('../models/index');
 const Sequelize = require('sequelize');
 const fs = require('fs');
+require('dotenv').config();
 
 // Création d'un utilisateur dans la bdd
 exports.signup = async (req, res, next) => {
@@ -20,13 +21,7 @@ exports.signup = async (req, res, next) => {
         })
         res.status(201).json({ 
             message: 'Utilisateur crée !', 
-            userId: newUser.id,
-            photoProfil: newUser.photoProfil,
-            username: newUser.username,
-            email: newUser.email,
-            password: newUser.password,
-            bio: newUser.bio,
-            isAdmin: newUser.isAdmin
+            newUser
         })
     }
     catch (error) {
@@ -44,15 +39,15 @@ exports.login = (req, res, next) => { // récupération du login
                     return res.status(401).json({ error: 'Mot de passe incorrect !'});
                 } else { // envoi du Token
                     res.status(200).json({ // identifiant valable donc envoi de son user + token bearer
-                        userId : user.id,
-                        photoProfil : user.photoProfil,
+                        id: user.id,
+                        photoProfil: user.photoProfil,
                         username: user.username,
                         bio: user.bio,
                         email: user.email,
                         password: user.password,
                         isAdmin: user.isAdmin,
                         token: jwt.sign( // identification avec un TOKEN
-                            { userId: user.id,
+                            { id: user.id,
                             isAdmin: user.isAdmin },
                             process.env.TOKEN_SECRET, // utilisation d'une chaîne secrète de développement temporaire pour encoder le token
                             { expiresIn: '24h' } // validité du token à 24 heures. L'utilisateur devra donc se reconnecter au bout de 24 heures
@@ -61,7 +56,7 @@ exports.login = (req, res, next) => { // récupération du login
                     });
                 }
             })
-                .catch(error => res.status(500).json({ error }));
+            .catch(error => res.status(500).json({ error }));
         })
     .catch(error => res.status(500).json({ error }));
 };
@@ -143,6 +138,13 @@ exports.getOneUser = (req, res, next) => {
             }
           ],
     })
-      .then(user => res.status(200).json(user))
-      .catch(error => res.status(400).json({ error }));
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(400).json({ error }));
+};
+
+// Afficher/Récupérer le currentUser
+exports.getMe = (req, res) => {
+    User.findByPk(req.user.id)
+    .then((user) => res.send(req.user))
+    .catch(error => res.status(400).json({ error }));
 };
