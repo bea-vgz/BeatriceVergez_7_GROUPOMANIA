@@ -44,7 +44,6 @@ exports.login = (req, res, next) => { // récupération du login
                         username: user.username,
                         bio: user.bio,
                         email: user.email,
-                        password: user.password,
                         isAdmin: user.isAdmin,
                         token: jwt.sign( // identification avec un TOKEN
                             { id: user.id,
@@ -121,8 +120,7 @@ exports.getAllUsers = (req, res, next) => {
     
       User.findAll(options)
         .then(users => res.status(200).json(users))
-        .catch(error => { console.log(error)
-          res.status(400).json({ error })
+        .catch(error => { res.status(400).json({ error })
       })
     };
 
@@ -143,8 +141,17 @@ exports.getOneUser = (req, res, next) => {
 };
 
 // Afficher/Récupérer le currentUser
-exports.getMe = (req, res) => {
-    User.findByPk(req.params.userId)
-    .then((user) => res.send(req.user))
-    .catch(error => res.status(400).json({ error }));
-};
+exports.getMe = async (req, res, next) =>{
+    try {
+      const user = await User.findOne({
+        attributes: ["id", "username", "bio", "email", "photoProfil", "isAdmin"],
+        where: { id: req.user.id }
+      });
+      if (!user) {
+        throw new Error("désolé nous ne trouvons pas votre compte");
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(400).json(error); 
+    }
+  };

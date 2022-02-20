@@ -15,12 +15,12 @@ export default {
     Notifications
   },
   setup() {
-      if (!userIsLogged()) {
-        return router.push("/");
-      }
-      else {
-        return router.push("/home");
-      }
+    if (!userIsLogged()) {
+      return router.push("/");
+    }
+    else {
+      return router.push("/home");
+    }
   },
 }
 </script>
