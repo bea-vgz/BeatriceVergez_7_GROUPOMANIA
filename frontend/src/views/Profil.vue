@@ -24,7 +24,7 @@
           </div>
         </b-col>
         <b-col col-lg="12" class="align-items-center">
-          <AllPosts :userId="user.id" />
+          <AllPosts :userId="this.user.id" />
         </b-col>
       </div>
     </div>
@@ -58,7 +58,7 @@ export default {
     return {
       modifyProfil: false,
       image:'',
-      user:{},
+      user:'',
       posts: [],
       post: ''
     }

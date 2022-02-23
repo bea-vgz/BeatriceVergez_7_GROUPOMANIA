@@ -4,7 +4,7 @@
       customClass="post-button"
       classCollapse="post-btn-collapsed"
       :editingPost="true"
-      :isCreator="post.UserId == user.id"
+      :isCreator="post.User.id == user.id"
       :isAdmin="user.isAdmin"
       @onDelete="openConfirm"
       :elementId="post.id"

@@ -1,8 +1,5 @@
 <template>
   <div class="comment">
-    <p class="comment-date">
-      {{ getDateWithoutTime(comment.updatedAt) }}
-    </p>
     <div class="d-flex">
       <div class="UserAvatar" v-if="comment.User">
         <router-link :to="{ name: 'ProfilUser', params: { userId: comment.User.id } }" >
@@ -36,24 +33,28 @@
           :isAdmin="user.isAdmin"
           @clickedEditButton="startEditing"
           @onDelete="deleteComment"
+          :elementId="comment.id"
           modifyText="Modifier"
           deleteText="Supprimer"
         />
       </div>
     </div>
     <div class="footer-comment d-flex">
+      <p class="comment-date">
+        {{ getDateWithoutTime(comment.updatedAt) }}
+      </p>
       <div class="d-flex justify-content-around">
         <div class="button-dis-like d-flex" v-if="comment.Like_comments">
-          <AllLikesComment
-          :post="post"
-          :comment="comment" 
-          :likesCount="comment.Like_comments.length"
-          />
-        </div>
+            <AllLikesComment
+            :post="post"
+            :comment="comment" 
+            :likesCount="comment.Like_comments.length"
+            />
+          </div>
         <button
           @click="likeOrNotComment"
           class="react-btn"
-          aria-label="Liker"
+          aria-label="Liker ou disliker"
         >
           <div v-if="likeThisComment">
             <path
@@ -65,6 +66,7 @@
               fill="currentColor"
             />
           </div>
+
           <span :class="`like-comment ${likeThisComment ? 'blue' : ''}`"> J'aime</span>
         </button>
         <div class="button-dis-like d-flex" v-if="comment.Dislike_comments">
@@ -76,7 +78,7 @@
         </div>
         <button
           @click="dislikeOrNotComment"
-          class="react-btn"
+          class="react-btn footer-btn "
           aria-label="Disliker"
         >
           <div v-if="dislikeThisComment">
@@ -103,12 +105,18 @@ import { mapActions } from 'vuex'
 import CommentService from "../service/comment.resource";
 import EditButton from '../components/EditButton.vue';
 import AllLikesComment from '../components/AllLikesComment.vue';
+import AuthService from "../service/auth.resource";
 export default {
   name: 'Comment',
   props: ['post', 'comment'],
   components: {
     EditButton,
     AllLikesComment
+  },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
   },
    data () {
     return {
@@ -120,9 +128,10 @@ export default {
       user:''
     }
   },
-  mounted() {
+  async mounted() {
     this.getLikeOnOneComment()
     this.getDislikeOnOneComment()
+    this.user = await AuthService.getCurrentUser();
   },
   methods: {
      ...mapActions(['displayNotification']),
@@ -161,8 +170,6 @@ export default {
         console.log(error);
       });
     },
-
-
     async likeOrNotComment() {
       const commentId = this.comment.id;
       const res = await LikeCommentService.likeComment(commentId)
@@ -171,7 +178,6 @@ export default {
       }
       this.likeThisComment = res.data.like
     },
-
     async dislikeOrNotComment() {
       const commentId = this.comment.id;
       const res = await DislikeCommentService.dislikeComment(commentId)
@@ -180,7 +186,6 @@ export default {
       }
       this.dislikeThisComment = res.data.dislike
     },
-
     getLikeOnOneComment(){
     const commentId = this.comment.id;
       LikeCommentService.getLikeOnOneComment(commentId)
@@ -210,17 +215,13 @@ export default {
   border-radius: 0.25rem;
   outline: none;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-.input-content {
-  width: 100%;
-}
+} 
 .comment-date {
   margin-left: 45px;
   margin-right: 1rem;
   font-size: 0.7rem;
   color: #747474;
   margin-top: 0.4rem;
-  margin-bottom: 0.2rem;
 }
 .comment-box {
   background-color: #F2F2F2;
@@ -285,7 +286,6 @@ a {
 }
 .footer-comment {
   display: flex;
-  margin-left: 2.5rem;
 }
 .like-comment, .dislike-comment {
   font-size: 0.7rem;
