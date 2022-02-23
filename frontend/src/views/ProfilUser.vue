@@ -12,7 +12,7 @@
               <p><strong>Email : </strong>{{ user.email }}</p>
               <p><strong>Biographie :</strong>{{ user.bio }}</p>
               <AdminDeleteUser
-                v-if="user.isAdmin"
+                v-if="currentUser.isAdmin"
                 :user="user"
               />
             </div>
@@ -22,7 +22,7 @@
       <div class="line mb-3"></div>
       <b-row class="row justify-content-center align-items-center flex-column">
         <b-col cols="12" lg="6" class="align-items-center">
-          <div class="posts" v-if="user.Posts.length > 0 ">
+          <div class="posts" v-if="user.Posts">
             <h2 class="text-center posts-title"><strong> • SES POSTS • </strong></h2>
             <AllPosts :userId="this.$route.params.userId" />
           </div>
@@ -60,11 +60,13 @@ export default {
       userId:'',
       user: '',
       post: '',
-      posts: []
+      posts: [],
+      currentUser:''
     }
   },
   async mounted () {
     this.getOneUser()
+    this.currentUser = await AuthService.getCurrentUser()
   },
   methods: {
     getOneUser() {

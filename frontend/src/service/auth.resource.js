@@ -30,28 +30,23 @@ class AuthService {
     }
 
     logout() {
-      Cookies.remove('userToken_groupomania', { path: '' })
+      Cookies.remove('userToken_groupomania')
     }
 
     deleteUser(payload) {
       const id = payload
-      return resource.delete(`/users/${id}`, { 
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + Cookies.get('userToken_groupomania'),
-        } 
-      })
+      return resource.delete(`/users/${id}`, { headers: authHeader() })
     }
 
-    modifyUser(userId, user) {
-      return resource.put(`/users/${userId}`, user, { headers: authHeader() })
+    modifyUser(id, user) {
+      return resource.put(`/users/${id}`, user, { headers: authHeader() })
       .then(response => {
         return response.data
       });
     }
 
-    modifyPassword(userId, data) {
-      return resource.put(`/users/${userId}/password`, data, { headers: authHeader() })
+    modifyPassword(id, data) {
+      return resource.put(`/users/${id}/password`, data, { headers: authHeader() })
       .then(response => {
         console.log(response)
       });

@@ -2,12 +2,12 @@
   <div class="comment">
     <div class="d-flex">
       <div class="UserAvatar" v-if="comment.User">
-        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.User.id } }" >
+        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.UserId } }" >
           <img :src="comment.User.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
         </router-link>
       </div>
       <div class="comment-box" v-if="comment.User">
-        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.User.id } }">
+        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.UserId } }">
           <p class="comment-username">
             {{ comment.User.username }}
           </p>
@@ -29,8 +29,8 @@
         <EditButton
           customClass="comment-button"
           classCollapse="comment-btn-collapsed"
-          :isCreator="comment.User.id == user.id"
-          :isAdmin="user.isAdmin"
+          :isCreator="comment.UserId == currentUser.id"
+          :isAdmin="currentUser.isAdmin"
           @clickedEditButton="startEditing"
           @onDelete="deleteComment"
           :elementId="comment.id"
@@ -113,11 +113,6 @@ export default {
     EditButton,
     AllLikesComment
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
-  },
    data () {
     return {
       isEditing: false,
@@ -125,13 +120,13 @@ export default {
       dislikeThisComment: false,
       likesCount: '',
       dislikesCount:'',
-      user:''
+      currentUser:''
     }
   },
   async mounted() {
     this.getLikeOnOneComment()
     this.getDislikeOnOneComment()
-    this.user = await AuthService.getCurrentUser();
+    this.currentUser = await AuthService.getCurrentUser();
   },
   methods: {
      ...mapActions(['displayNotification']),
@@ -210,6 +205,9 @@ export default {
 }
 .comment-button {
   position: static !important;
+}
+.input-content {
+  width: 100%;
 }
 .input-content:focus {
   border-radius: 0.25rem;

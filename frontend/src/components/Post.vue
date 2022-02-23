@@ -3,7 +3,7 @@
     <div class="card-post">
       <div class="user">
         <div class="UserAvatar" v-if="post.User">
-          <router-link :to="{ name: 'ProfilUser', params: { userId: post.User.id } }">
+          <router-link :to="{ name: 'ProfilUser', params: { userId: post.UserId } }">
             <img :src="post.User.photoProfil" alt="Photo de profil de l'user" class="postUserPhoto">
           </router-link>
           <div class="infoPostUser">

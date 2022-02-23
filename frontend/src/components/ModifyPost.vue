@@ -4,8 +4,8 @@
       customClass="post-button"
       classCollapse="post-btn-collapsed"
       :editingPost="true"
-      :isCreator="post.User.id == user.id"
-      :isAdmin="user.isAdmin"
+      :isCreator="post.UserId == currentUser.id"
+      :isAdmin="currentUser.isAdmin"
       @onDelete="openConfirm"
       :elementId="post.id"
       modifyText="Modifier le post"
@@ -62,11 +62,12 @@ export default {
       titleModal: "",
       action: "",
       message:"",
-      user:''
+      user:'',
+      currentUser: {}
     }
   },
   async mounted() {
-    this.user = await AuthService.getCurrentUser();
+    this.currentUser = await AuthService.getCurrentUser();
     this.image = this.post.image;
   },
   methods: {

@@ -11,7 +11,7 @@
             <div>
               <label for="password"> 🔒  Mot de passe actuel : </label>
               <div class="inputPassword">
-                <input v-if="user" v-model="user.password" placeholder="Mot de passe actuel" class="form-row_input" id="password" type='password' />
+                <input v-if="currentUser" v-model="currentUser.password" placeholder="Mot de passe actuel" class="form-row_input" id="password" type='password' />
               </div>
             </div>
             <div>
@@ -73,11 +73,12 @@
         newPassword: '',
         confirmPassword:'',
         show: false,
-        message:''
+        message:'',
+        currentUser: {}
       }
     },
     async mounted() {
-      this.user = await AuthService.getCurrentUser()
+      this.currentUser = await AuthService.getCurrentUser()
     },
     methods: {
       ...mapActions(['displayNotification']),
@@ -86,10 +87,10 @@
           const password = {
             password: this.newPassword,
           }
-          const userId = this.user.id
+          const userId = this.currentUser.id
           AuthService.modifyPassword(userId, password)
           .then(() => {
-            this.user.id
+            this.currentUser.id
             this.displayNotification('Mot de passe modifié avec succès !')
             router.push('/home');
           })

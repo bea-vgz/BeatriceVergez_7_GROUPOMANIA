@@ -149,7 +149,15 @@ exports.getOneUser = (req, res, next) => {
 // Afficher/Récupérer un currentUser
 exports.me = async (req, res, next) => {
     User.findOne({
-        where: { id: req.user.id }
+        where: { id: req.user.id },
+        include: [
+            { 
+              model: Post,
+            },
+            {
+              model: Comment,
+            }
+          ],
     })
     .then(user => res.status(200).json(user))
     .catch(error => res.status(400).json({ error }));

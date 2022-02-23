@@ -8,16 +8,16 @@ module.exports = (req, res, next) => {
       const user = decodedToken.id;
       const isAdmin = decodedToken.isAdmin;
       
-        // On vérifie que le userId du token correspond au userId du comment */
-        Comment.findOne({ where: { id: req.params.id } })
-          .then(comment => {
-            if ((comment.UserId !== user) && (isAdmin !== true)) {
-              res.status(403).json({ message: "Requête non authentifiée" });
-            } 
-            else {
-              next();
-            };
-          }
+      // On vérifie que le userId du token correspond au userId du comment */
+      Comment.findOne({ where: { id: req.params.id } })
+      .then(comment => {
+        if ((comment.UserId !== user) && (isAdmin !== true)) {
+          res.status(403).json({ message: "Requête non authentifiée" });
+        } 
+        else {
+          next();
+        };
+      }
     )} catch {
       res.status(401).json({error:error});
   }

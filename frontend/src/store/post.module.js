@@ -49,14 +49,14 @@ actions: {
   })
   },
   
-  getOnePost({ commit }) {
-    return PostService.getOnePost()
-    .then((post) => {
-      commit('getOnePost');
-      return Promise.resolve(post);
+  getOnePost({ commit }, post) {
+    return PostService.getOnePost(post)
+    .then((response) => {
+      commit('getOnePost', response.data);
+      return Promise.resolve(response);
     },
     (error) => {
-      commit('getOnePostFailure')
+      commit('messageFailure')
       return Promise.reject(error)
     })
   },
@@ -103,15 +103,7 @@ mutations: {
     },
     messageFailure(state, message) {
       state.message = message
-    },
-    getPostsLikes(state, likes) {
-      state.post.likes = likes;
-      state.message = "Likes récupérés !";
-    },
-    getPostsLikesFailure(state) {
-      state.likes = null;
-      state.message = "Likes non récupérés !";
-    },
+    }
 }
 
 }

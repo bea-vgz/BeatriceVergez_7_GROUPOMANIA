@@ -9,11 +9,11 @@
           <div class="infoUser bg-white">
             <h1><strong>Mon profil</strong> </h1>
             <div class="userInfo">
-              <p><strong>Pseudo : </strong>{{ user.username }}</p>
-              <p><strong>Email : </strong>{{ user.email }}</p>
-              <p><strong>Biographie :</strong>{{ user.bio }}</p>
-              <p><strong>Identifiant :</strong> {{ user.id }}</p>
-              <div v-if="user.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
+              <p><strong>Pseudo : </strong>{{ currentUser.username }}</p>
+              <p><strong>Email : </strong>{{ currentUser.email }}</p>
+              <p><strong>Biographie :</strong>{{ currentUser.bio }}</p>
+              <p><strong>Identifiant :</strong> {{ currentUser.id }}</p>
+              <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
             </div>
             <div class="line mb-3"></div>
             <a title="Modifier mon profil" @click="displayModal" class="icone">
@@ -24,7 +24,7 @@
           </div>
         </b-col>
         <b-col col-lg="12" class="align-items-center">
-          <AllPosts :userId="this.user.id" />
+          <AllPosts :userId="this.currentUser" />
         </b-col>
       </div>
     </div>
@@ -51,17 +51,18 @@ export default {
     AllPosts,
     AsideProfil
   },
-  async mounted() {
-    this.user = await AuthService.getCurrentUser()
-  },
   data() {
     return {
       modifyProfil: false,
       image:'',
       user:'',
       posts: [],
-      post: ''
+      post: '',
+      currentUser: {}
     }
+  },
+  async mounted() {
+    this.currentUser = await AuthService.getCurrentUser()
   },
   methods: {
     ...mapActions(['displayNotification']),

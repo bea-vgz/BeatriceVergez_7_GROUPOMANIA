@@ -15,10 +15,10 @@
         <div class="notifUser">
           <div class="menu-item" @click="isOpen = !isOpen" >
             <button class="accessUser">
-              <img v-if="user.photoProfil" :src="user.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
+              <img v-if="currentUser.photoProfil" :src="currentUser.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
               <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar icone" alt="Avatar"/>
               <span class="username">
-                <strong style="text-transform: uppercase"> {{ user.username }} </strong>
+                <strong style="text-transform: uppercase"> {{ currentUser.username }} </strong>
               </span>
             </button>
             <transition name="fade" apear>
@@ -52,11 +52,12 @@ export default {
       userSearch: null,
       isOpen: false,
       image:'',
-      user: {}
+      user: {},
+      currentUser: {}
     }
   },
   async mounted() {
-    this.user = await AuthService.getCurrentUser()
+    this.currentUser = await AuthService.getCurrentUser()
   },
   components: {
     UserSearch,

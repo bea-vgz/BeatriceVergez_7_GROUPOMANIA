@@ -7,10 +7,8 @@
         />
       </b-col>
     </b-row>
-    <p class="mx-2">{{ post.errorMessage }}</p>
   </div>
 </template>
-
 
 <script>
 import Post from "../components/Post.vue";

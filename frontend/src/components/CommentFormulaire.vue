@@ -2,9 +2,9 @@
   <div>
     <div class="container_comments">
       <div>
-        <router-link to="/profil" v-if="user">
+        <router-link to="/profil">
           <div class="UserAvatar">
-            <img v-if="user" :src="user.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
+            <img :src="currentUser.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
           </div>
         </router-link>
       </div>
@@ -34,12 +34,12 @@ export default {
   data () {
     return {
       content: '',
-      user: ''
+      currentUser: {}
     };
   },
   props: ['post'],
   async mounted() {
-    this.user = await AuthService.getCurrentUser()
+    this.currentUser = await AuthService.getCurrentUser()
   },
   methods: {
     ...mapActions(['displayNotification']),

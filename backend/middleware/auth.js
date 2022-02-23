@@ -17,6 +17,6 @@ module.exports = async (req, res, next) => {
       next();
     }
   } catch {
-      res.status(401).json({error: "User non trouvé ! Le token est requis"});
+      res.status(401).json({error: "Non autorisé"});
     }
 };

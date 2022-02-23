@@ -2,10 +2,10 @@
     <aside class="profil_account bg-white sidebar">
         <div class="sidebar__widget">
           <div class="contanier_presentation bg-white border-b py-8">
-            <img v-if="user" :src="user.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
+            <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
             <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar" alt="Avatar" />
-            <h1 v-if="user" class="username">{{ user.username }}</h1>
-            <p v-if="user"><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
+            <h1 class="username">{{ currentUser.username }}</h1>
+            <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(currentUser.createdAt) }}</p>
           </div>
           <div class="optionsProfil bg-white">
             <div class="option"> 
@@ -28,7 +28,7 @@
           :title="titleModal"
           :action="action"
           @closeConfirm="closeConfirm"
-          :userId="user.id"
+          :userId="currentUser.id"
           :message="message"
         ></ConfirmDialogue>
       </aside>
@@ -46,14 +46,15 @@ export default {
         revealConfirm: false,
         titleModal: "",
         action: "",
-        message:""
+        message:"",
+        currentUser: {}
       }
     },
     components: {
       ConfirmDialogue
     },
     async mounted() {
-      this.user = await AuthService.getCurrentUser()
+      this.currentUser = await AuthService.getCurrentUser()
     },
     methods: {
     ...mapActions(['displayNotification']),

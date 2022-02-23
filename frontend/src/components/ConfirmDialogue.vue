@@ -38,7 +38,7 @@ export default {
         },
         confirm() {
             if(this.action == "deleteUser") {
-                let payload = this.$store.state.auth.user.userId
+                let payload = this.$store.state.auth.user.id
                 this.$store.dispatch("auth/deleteUser", payload)
                 .then(() => {
                     this.displayNotification('Compte supprimé avec succès!')
@@ -62,7 +62,6 @@ export default {
             else if(this.action == "deleteAccountUser") {
                 AuthService.deleteUser(`${this.userId}`)
                 .then(() => {
-                    this.user.isAdmin
                     this.displayNotification('Compte supprimé avec succès!')
                     router.push('/home');
                 },

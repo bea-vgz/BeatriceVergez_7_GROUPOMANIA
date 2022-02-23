@@ -6,6 +6,7 @@ import AuthService from '../service/auth.resource';
       statut: '',
       user: {},
       userInfos: {
+        id:'',
         username: '',
         email: '',
         bio: '',
@@ -73,10 +74,10 @@ import AuthService from '../service/auth.resource';
       })
     },
 
-    getOneUser({ commit }) {
-      return AuthService.getOneUser()
-      .then((user) => {
-        commit('getUser');
+    getOneUser({ commit }, user) {
+      return AuthService.getOneUser(user)
+      .then((response) => {
+        commit('getUser', response.data);
         return Promise.resolve(user);
       },
       (error) => {

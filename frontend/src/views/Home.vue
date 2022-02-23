@@ -11,8 +11,8 @@
     <div class="wrapper__text text-align">
       <h1 class="text text--highlight animate-delay-3">Bienvenue sur votre fil d'actualité <br /></h1>
     </div>
-    <div v-if="user.token !== null" class="wrapper__text text-align">
-      <h1 class="text text--highlight animate-delay-6">{{ user.username }} ! 😁</h1>
+    <div v-if="currentUser" class="wrapper__text text-align">
+      <h1 class="text text--highlight animate-delay-6">{{ currentUser.username }} ! 😁</h1>
     </div>
     </div>
     
@@ -41,10 +41,11 @@ export default {
 		return {
       posts: [],
       user: '',
+      currentUser: {}
 		};
 	},
   async mounted() {
-    this.user = await AuthService.getCurrentUser()
+    this.currentUser = await AuthService.getCurrentUser()
   },
   components: {
     Header,
