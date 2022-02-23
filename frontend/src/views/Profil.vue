@@ -24,7 +24,7 @@
           </div>
         </b-col>
         <b-col col-lg="12" class="align-items-center">
-          <AllPosts :userId="user.userId" />
+          <AllPosts :userId="user.id" />
         </b-col>
       </div>
     </div>

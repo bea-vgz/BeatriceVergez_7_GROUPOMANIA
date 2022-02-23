@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import AuthService from "../service/auth.resource"
 export default {
   name: 'PostFormulaire',
   data () {
@@ -87,6 +88,9 @@ export default {
     onFormSubmit () {
       this.file = null
     }
+  },
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
   },
   props: ['value','image', 'onFormSubmit', 'isCreating'],
   methods: {

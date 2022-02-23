@@ -14,11 +14,9 @@ module.exports = async (req, res, next) => {
       return res.status(401).json({error: "User role non valide !"})
     } else {
       req.user = user;
-      res.status(200).send(user)
-      console.log(user)
       next();
     }
   } catch {
-      res.status(401).json({error: "User non trouvé !"});
+      res.status(401).json({error: "User non trouvé ! Le token est requis"});
     }
 };

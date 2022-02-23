@@ -1,10 +1,10 @@
 <template>
   <transition name="modal-fade">
     <div class="fixed inset-0 transition-opacity">
-      <form @submit.prevent="update" class="modifyProfil" v-if="currentUser">
+      <form @submit.prevent="update" class="modifyProfil" v-if="user">
         <div class="bg-white"></div>
           <div class="img">
-            <img :src="file || currentUser.photoProfil" alt="Avatar" ref="file" type="file">
+            <img :src="file || user.photoProfil" alt="Avatar" ref="file" type="file">
           </div>
           <b-form>
             <button
@@ -46,7 +46,7 @@
                   id="username"
                   type="text"
                   placeholder="Pseudo"
-                  v-model="currentUser.username"
+                  v-model="user.username"
                   class="text-dark mb-2 pl-lg-3"
                 ></b-form-input>
               </b-col>
@@ -60,12 +60,12 @@
                   id="bio"
                   type="text"
                   placeholder="Biographie"
-                  v-model="currentUser.bio"
+                  v-model="user.bio"
                   class="mb-2 pl-lg-3"
                 ></b-form-input>
               </b-col>
             </div>
-            <div v-if="currentUser.isAdmin" class="d-flex align-items-center">
+            <div v-if="user.isAdmin" class="d-flex align-items-center">
               <b-col sm="2" class="d-none d-lg-block p-0">
                 <label for="admin"><strong>  Statut </strong></label>
               </b-col>
@@ -99,7 +99,6 @@
 <script>
 import { mapActions } from 'vuex'
 import AuthService from "../service/auth.resource";
-import router from "../router";
 export default {
   name: "ModifyProfil",
   data() {
@@ -110,10 +109,8 @@ export default {
       users:[],
     }
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
   },
   methods: {
     ...mapActions(['displayNotification']),
@@ -123,21 +120,20 @@ export default {
       if(this.image && this.image != "") {
         user = new FormData();
         user.append('image', this.image);
-        user.append('username', this.currentUser.username);
-        user.append('bio', this.currentUser.bio);
+        user.append('username', this.user.username);
+        user.append('bio', this.user.bio);
       }
       else {
         user = {
-          username: this.currentUser.username,
-          bio: this.currentUser.bio
+          username: this.user.username,
+          bio: this.user.bio
         }
       }
-      const id = this.currentUser.id
+      const id = this.user.id
       AuthService.modifyUser(id, user)
           .then(() => {
-          this.currentUser.userId = id
+          this.user.id
           this.displayNotification('User modifié !')
-          router.push('/home');
         })
         .catch(error => {
           this.errorMessage = error.message;
@@ -146,7 +142,7 @@ export default {
     },
 
     onFileChange(event) {
-      this.currentUser.photoProfil = URL.createObjectURL(event.target.files[0])
+      this.user.photoProfil = URL.createObjectURL(event.target.files[0])
       this.image = event.target.files[0]
     },
     triggerInput () {

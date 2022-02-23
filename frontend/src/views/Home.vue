@@ -12,7 +12,7 @@
       <h1 class="text text--highlight animate-delay-3">Bienvenue sur votre fil d'actualité <br /></h1>
     </div>
     <div v-if="user.token !== null" class="wrapper__text text-align">
-      <h1 class="text text--highlight animate-delay-6">{{ user.id }} ! 😁</h1>
+      <h1 class="text text--highlight animate-delay-6">{{ user.username }} ! 😁</h1>
     </div>
     </div>
     
@@ -40,7 +40,7 @@ export default {
   data() {
 		return {
       posts: [],
-      user: {},
+      user: '',
 		};
 	},
   async mounted() {

@@ -36,7 +36,8 @@
 <script>
 import { mapActions } from 'vuex'
 import router from "../router";
-import ConfirmDialogue from "../components/ConfirmDialogue.vue"
+import ConfirmDialogue from "../components/ConfirmDialogue.vue";
+import AuthService from "../service/auth.resource"
 export default {
     name: 'AsideProfil',
     data() {
@@ -50,6 +51,9 @@ export default {
     },
     components: {
       ConfirmDialogue
+    },
+    async mounted() {
+      this.user = await AuthService.getCurrentUser()
     },
     methods: {
     ...mapActions(['displayNotification']),

@@ -15,9 +15,9 @@
         <div class="notifUser">
           <div class="menu-item" @click="isOpen = !isOpen" >
             <button class="accessUser">
-              <img v-if="user" :src="user.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
+              <img v-if="user.photoProfil" :src="user.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
               <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar icone" alt="Avatar"/>
-              <span v-if="user" class="username">
+              <span class="username">
                 <strong style="text-transform: uppercase"> {{ user.username }} </strong>
               </span>
             </button>
@@ -43,6 +43,7 @@ import { mapActions } from 'vuex'
 import router from "../router";
 import MenuBurger from "../components/MenuBurger.vue"
 import UserSearch from '../components/UserSearch';
+import AuthService from "../service/auth.resource"
 export default {
   
   name: 'Header',
@@ -51,7 +52,11 @@ export default {
       userSearch: null,
       isOpen: false,
       image:'',
+      user: {}
     }
+  },
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
   },
   components: {
     UserSearch,

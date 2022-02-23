@@ -4,8 +4,8 @@
       customClass="post-button"
       classCollapse="post-btn-collapsed"
       :editingPost="true"
-      :isCreator="post.UserId == currentUser.userId"
-      :isAdmin="currentUser.isAdmin"
+      :isCreator="post.UserId == user.id"
+      :isAdmin="user.isAdmin"
       @onDelete="openConfirm"
       :elementId="post.id"
       modifyText="Modifier le post"
@@ -41,6 +41,7 @@
 
 <script>
 import PostService from "../service/post.resource";
+import AuthService from "../service/auth.resource";
 import { mapActions } from 'vuex'
 import PostFormulaire from '../components/PostFormulaire.vue'
 import EditButton from '../components/EditButton.vue'
@@ -60,16 +61,13 @@ export default {
       revealConfirm: false,
       titleModal: "",
       action: "",
-      message:""
+      message:"",
+      user:''
     }
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
-  },
-  mounted() {
-    this.image = this.post.image
+  async mounted() {
+    this.user = await AuthService.getCurrentUser();
+    this.image = this.post.image;
   },
   methods: {
     ...mapActions(['displayNotification']),

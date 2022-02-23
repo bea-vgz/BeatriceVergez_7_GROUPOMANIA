@@ -11,7 +11,7 @@ require('dotenv').config();
 exports.signup = async (req, res, next) => {
     try {
         const hash = await bcrypt.hash(req.body.password, 10);
-        const newUser = await User.create({
+        const user = await User.create({
             photoProfil : src="//ssl.gstatic.com/accounts/ui/avatar_1x.png",
             username : req.body.username,
             email: req.body.email,
@@ -21,7 +21,12 @@ exports.signup = async (req, res, next) => {
         })
         res.status(201).json({ 
             message: 'Utilisateur crée !', 
-            newUser
+            id: user.id,
+            photoProfil: user.photoProfil,
+            username: user.username,
+            bio: user.bio,
+            email: user.email,
+            isAdmin: user.isAdmin
         })
     }
     catch (error) {
@@ -53,6 +58,7 @@ exports.login = (req, res, next) => { // récupération du login
                         ),
                         message: `Hello ${user.username} !`, 
                     });
+                    console.log("User connecté");
                 }
             })
             .catch(error => res.status(500).json({ error }));
@@ -140,18 +146,7 @@ exports.getOneUser = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 };
 
-// Afficher/Récupérer le currentUser
-exports.getMe = async (req, res, next) =>{
-    try {
-      const user = await User.findOne({
-        attributes: ["id", "username", "bio", "email", "photoProfil", "isAdmin"],
-        where: { id: req.user.id }
-      });
-      if (!user) {
-        throw new Error("désolé nous ne trouvons pas votre compte");
-      }
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(400).json(error); 
-    }
-  };
+// Afficher/Récupérer un currentUser
+exports.me = (req, res, next) => {
+    res.status(200).json(req.user)
+};

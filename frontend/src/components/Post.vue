@@ -118,6 +118,7 @@ import DislikePostService from "../service/dislike_post.resource";
 import AllComments from "../components/AllComments.vue";
 import AllLikesPost from "./AllLikesPost.vue";
 import ModifyPost from '../components/ModifyPost.vue';
+import AuthService from "../service/auth.resource"
 export default {
   data() {
     return {
@@ -135,12 +136,8 @@ export default {
     AllLikesPost,
     ModifyPost,
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
-  },
-  mounted() {
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
     this.getLikeOnOnePost()
     this.getDislikeOnOnePost()
   },

@@ -27,11 +27,6 @@ export default {
       didSubmitForm: false,
     }
   },
-  computed: {
-    currentUser() {
-      return this.$store.state.auth.user;
-    }
-  },
   methods: {
     ...mapActions(['displayNotification']),
     onFileSelected(file) {

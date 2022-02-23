@@ -69,7 +69,10 @@ class AuthService {
 
     getCurrentUser(){
       return resource.get(`/users/me`, { headers: authHeader() })
-  }
+      .then(response => { 
+        return response.data 
+      })
+    }
 }
 
 export default new AuthService();
