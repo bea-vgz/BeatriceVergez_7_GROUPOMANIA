@@ -5,12 +5,12 @@
     </p>
     <div class="d-flex">
       <div class="UserAvatar" v-if="comment.User">
-        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.UserId } }" >
+        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.User.id } }" >
           <img :src="comment.User.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
         </router-link>
       </div>
       <div class="comment-box" v-if="comment.User">
-        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.UserId } }">
+        <router-link :to="{ name: 'ProfilUser', params: { userId: comment.User.id } }">
           <p class="comment-username">
             {{ comment.User.username }}
           </p>
@@ -32,7 +32,7 @@
         <EditButton
           customClass="comment-button"
           classCollapse="comment-btn-collapsed"
-          :isCreator="comment.UserId == user.id"
+          :isCreator="comment.User.id == user.id"
           :isAdmin="user.isAdmin"
           @clickedEditButton="startEditing"
           @onDelete="deleteComment"
@@ -102,7 +102,7 @@ import LikeCommentService from "../service/like_comment.resource";
 import { mapActions } from 'vuex'
 import CommentService from "../service/comment.resource";
 import EditButton from '../components/EditButton.vue';
-import AllLikesComment from '../components/AllLikesComment.vue'
+import AllLikesComment from '../components/AllLikesComment.vue';
 export default {
   name: 'Comment',
   props: ['post', 'comment'],
@@ -116,7 +116,8 @@ export default {
       likeThisComment: false,
       dislikeThisComment: false,
       likesCount: '',
-      dislikesCount:''
+      dislikesCount:'',
+      user:''
     }
   },
   mounted() {

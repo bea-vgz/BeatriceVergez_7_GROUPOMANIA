@@ -131,8 +131,8 @@ export default {
       }
       const id = this.user.id
       AuthService.modifyUser(id, user)
-          .then(() => {
-          this.user.id
+        .then(() => {
+          this.user
           this.displayNotification('User modifié !')
         })
         .catch(error => {

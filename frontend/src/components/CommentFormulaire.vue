@@ -2,9 +2,9 @@
   <div>
     <div class="container_comments">
       <div>
-        <router-link :to="{ name: 'Profil' }" >
+        <router-link to="/profil" v-if="user">
           <div class="UserAvatar">
-            <img :src="user.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
+            <img v-if="user" :src="user.photoProfil" alt="Photo de profil de l'user" class="commentUserPhoto">
           </div>
         </router-link>
       </div>
@@ -26,16 +26,21 @@
   </div>
 </template>
 <script>
-import CommentService from '../service/comment.resource'
+import CommentService from '../service/comment.resource';
+import AuthService from "../service/auth.resource";
 import { mapActions } from 'vuex'
 export default {
   name: 'CommentFormulaire',
   data () {
     return {
-      content: ''
+      content: '',
+      user: ''
     };
   },
   props: ['post'],
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
+  },
   methods: {
     ...mapActions(['displayNotification']),
     createComment(){

@@ -27,6 +27,7 @@
 import CommentFormulaire from '../components/CommentFormulaire.vue'
 import Comment from '../components/Comment.vue'
 import CommentService from '../service/comment.resource'
+import AuthService from "../service/auth.resource";
 export default {
   name: 'AllComments',
   components: {
@@ -39,6 +40,9 @@ export default {
       comments: [],
       allCommentsDisplayed : false
     }
+  },
+  async mounted() {
+    this.user = await AuthService.getCurrentUser()
   },
   methods: {
     AllPostsComments() {

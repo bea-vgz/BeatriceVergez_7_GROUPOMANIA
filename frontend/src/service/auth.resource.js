@@ -25,9 +25,7 @@ class AuthService {
         password: user.password,
       })
       .then(response => {
-        if (response) {
-          return response.data;
-        }
+        return response.data;
       });
     }
 

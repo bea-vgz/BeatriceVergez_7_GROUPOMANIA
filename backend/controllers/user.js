@@ -147,6 +147,10 @@ exports.getOneUser = (req, res, next) => {
 };
 
 // Afficher/Récupérer un currentUser
-exports.me = (req, res, next) => {
-    res.status(200).json(req.user)
+exports.me = async (req, res, next) => {
+    User.findOne({
+        where: { id: req.user.id }
+    })
+    .then(user => res.status(200).json(user))
+    .catch(error => res.status(400).json({ error }));
 };
