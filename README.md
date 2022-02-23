@@ -29,7 +29,7 @@ cd backend / npm install / nodemon server
 __
 
 **BDD MySQL :** 
-***Générée par Sequelize ORM***
+***Générée par Sequelize ORM, MySQL Workbench***
 
 BDD installée en local
 
