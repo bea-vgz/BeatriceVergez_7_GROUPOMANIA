@@ -8,7 +8,7 @@
         <b-col cols="12" class="align-items-center">
           <div class="infoUser bg-white">
             <h1><strong>Mon profil</strong> </h1>
-            <div class="userInfo">
+            <div class="userInfo" v-if="currentUser">
               <p><strong>Pseudo : </strong>{{ currentUser.username }}</p>
               <p><strong>Email : </strong>{{ currentUser.email }}</p>
               <p><strong>Biographie :</strong>{{ currentUser.bio }}</p>
@@ -23,8 +23,8 @@
             <modify-profil v-show="modifyProfil" @close="closeModal" />
           </div>
         </b-col>
-        <b-col col-lg="12" class="align-items-center">
-          <AllPosts :userId="this.currentUser" />
+        <b-col v-if="currentUser" col-lg="12" class="align-items-center">
+          <AllPosts :userId="currentUser.id" />
         </b-col>
       </div>
     </div>
@@ -41,7 +41,8 @@ import modifyProfil from '@/components/ModifyProfil.vue';
 import AllPosts from "../components/AllPosts.vue";
 import { mapActions } from 'vuex';
 import AsideProfil from "../components/AsideProfil.vue";
-import AuthService from "../service/auth.resource"
+import AuthService from "../service/auth.resource";
+
 export default {
   name: "Profil",
   components: {
@@ -58,7 +59,8 @@ export default {
       user:'',
       posts: [],
       post: '',
-      currentUser: {}
+      userId: '',
+      currentUser: this.currentUser
     }
   },
   async mounted() {
