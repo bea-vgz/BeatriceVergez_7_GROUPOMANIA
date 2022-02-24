@@ -82,24 +82,16 @@ mutations: {
     reset_store (state) {
       state.posts = []
     },
-    createPostSuccess(state, post) {
-      state.posts.unshift(post)
-      state.posts = [...state.posts]
-    },
-    createPostFailure(state) {
-      state.createdPost.status = 'Not created'
-      state.post = null
+    createPostSuccess(state, post, posts) {
+      state.post = post
+      state.posts = posts
     },
     getOnePost(state, post) {
       state.post = post;
       state.message = "Post récupéré !";
     },
-    getOnePostFailure(state) {
-      state.post = null;
-      state.message = "Post non récupéré !";
-    },
-    deleteSuccess(state) {
-      state.post = null
+    deleteSuccess(state, postId) {
+      state.posts = state.posts.filter(post => post.id !== postId)
     },
     messageFailure(state, message) {
       state.message = message

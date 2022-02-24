@@ -42,14 +42,14 @@ class AuthService {
       return resource.put(`/users/${id}`, user, { headers: authHeader() })
       .then(response => {
         return response.data
-      });
+      })
     }
 
-    modifyPassword(id, data) {
-      return resource.put(`/users/${id}/password`, data, { headers: authHeader() })
+    modifyPassword(id, user) {
+      return resource.put(`/users/${id}/password`, user, { headers: authHeader() })
       .then(response => {
-        console.log(response)
-      });
+        return response.data
+      })
     }
 
     getAllUsers(value) {
@@ -58,6 +58,9 @@ class AuthService {
 
     getOneUser(id){
       return resource.get(`/users/${id}`, { headers: authHeader() })
+      .then(response => { 
+        return response.data 
+      })
     }
 
     getCurrentUser(){

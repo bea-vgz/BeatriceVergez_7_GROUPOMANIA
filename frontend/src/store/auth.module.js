@@ -73,18 +73,6 @@ import AuthService from '../service/auth.resource';
         return Promise.reject(error)
       })
     },
-
-    getOneUser({ commit }, user) {
-      return AuthService.getOneUser(user)
-      .then((response) => {
-        commit('getUser', response.data);
-        return Promise.resolve(user);
-      },
-      (error) => {
-        commit('getUserFailure')
-        return Promise.reject(error)
-      })
-    },
   },
 
   mutations: {
@@ -121,19 +109,5 @@ import AuthService from '../service/auth.resource';
       state.users = null;
       state.message = "Users non récupérés !";
     },
-    getUser(state, user) {
-      state.user = user;
-      state.message = "User récupéré !";
-    },
-    getUserFailure(state) {
-      state.user = null;
-      state.message = "User non récupéré !";
-    },
-  },
-
-  getters : {
-    user: (state) => {
-      return state.user
-    }
-  },
+  }
 }

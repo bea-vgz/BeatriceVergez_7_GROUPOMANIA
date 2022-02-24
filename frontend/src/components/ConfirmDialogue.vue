@@ -52,7 +52,6 @@ export default {
                 const postId = this.post.id
                 this.$store.dispatch("post/deletePost", postId)
                 .then(() => {
-                    this.$store.dispatch('post/AllPostsStore')
                     this.displayNotification('Post supprimé avec succès!')
                 },
                 error => {

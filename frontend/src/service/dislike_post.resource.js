@@ -8,9 +8,7 @@ class DislikePostService {
     }
 
     dislikePost(postId, dislike) {
-        return resource.post(`posts/${postId}/dislikes`, dislike,
-            { headers: authHeader() }
-        )
+        return resource.post(`posts/${postId}/dislikes`, dislike, { headers: authHeader() })
     }
 
     getDislikeOnOnePost(postId) {

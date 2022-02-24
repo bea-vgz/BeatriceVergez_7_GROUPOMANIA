@@ -8,9 +8,7 @@ class LikeCommentService {
     }
 
     likeComment(commentId, like) {
-        return resource.post(`comments/${commentId}/likes`, like,
-            { headers: authHeader() }
-        )
+        return resource.post(`comments/${commentId}/likes`, like, { headers: authHeader() })
     }
 
     getLikeOnOneComment(commentId) {

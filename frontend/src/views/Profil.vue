@@ -56,7 +56,6 @@ export default {
     return {
       modifyProfil: false,
       image:'',
-      user:'',
       posts: [],
       post: '',
       userId: '',

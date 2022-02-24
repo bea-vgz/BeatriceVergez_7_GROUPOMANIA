@@ -4,7 +4,7 @@
       <button
         v-b-modal="`modal-likes-${comment.id}`"
         @click="getAllLikes"
-        v-if="likesCount > 0"
+        v-if="likesNumber > 0"
         class="like-btn d-flex align-items-center my-2 text-left"
         aria-label="Afficher les likes"
       >
@@ -18,12 +18,12 @@
           />
         </svg>
       </div>
-      <span class="likes-number ml-1">{{ likesCount }} </span>
+      <span class="likes-number ml-1">{{ likesNumber }} </span>
       </button>
       <button
         v-b-modal="`modal-dislikes-${comment.id}`"
         @click="getAllDislikes"
-        v-if="dislikesCount > 0"
+        v-if="dislikesNumber > 0"
         class="like-btn d-flex align-items-center my-2 text-left"
         aria-label="Afficher les dislikes"
       >
@@ -37,11 +37,11 @@
           />
         </svg>
       </div>
-      <span class="likes-number ml-1">{{ dislikesCount }}</span>
+      <span class="likes-number ml-1">{{ dislikesNumber }}</span>
       </button>
     </div>
 
-    <b-modal v-if="likesCount" :id="`modal-likes-${comment.id}`" :title="`${likesCount} personne(s) aime(nt) ce commentaire`">
+    <b-modal v-if="likesNumber" :id="`modal-likes-${comment.id}`" :title="`${likesNumber} personne(s) aime(nt) ce commentaire`">
       <div v-for="like_comment in likes" :key="like_comment.id">
         <router-link
           :to="{ name: 'ProfilUser', params: { userId: like_comment.UserId } }"
@@ -57,7 +57,7 @@
       </div>
       <div slot="modal-footer"></div>
     </b-modal>
-    <b-modal v-if="dislikesCount" :id="`modal-dislikes-${comment.id}`" :title="`${dislikesCount} personne(s) n'aime(nt) pas ce commentaire`">
+    <b-modal v-if="dislikesNumber" :id="`modal-dislikes-${comment.id}`" :title="`${dislikesNumber} personne(s) n'aime(nt) pas ce commentaire`">
       <div v-for="dislike_comment in dislikes" :key="dislike_comment.id">
         <router-link
           :to="{ name: 'ProfilUser', params: { userId: dislike_comment.UserId } }"
@@ -81,7 +81,7 @@ import DislikeCommentService from '../service/dislike_comment.resource'
 import LikeCommentService from '../service/like_comment.resource'
 export default {
   name: 'AllLikesComment',
-  props: ['comment', 'likesCount', 'dislikesCount'],
+  props: ['comment', 'likesNumber', 'dislikesNumber'],
   data () {
     return {
       likes: [],

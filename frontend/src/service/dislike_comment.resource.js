@@ -8,9 +8,7 @@ class DislikeCommentService {
     }
 
     dislikeComment(commentId, dislike) {
-        return resource.post(`comments/${commentId}/dislikes`, dislike,
-            { headers: authHeader() }
-        )
+        return resource.post(`comments/${commentId}/dislikes`, dislike, { headers: authHeader() })
     }
 
     getDislikeOnOneComment(commentId) {

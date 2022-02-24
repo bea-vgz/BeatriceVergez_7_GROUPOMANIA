@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="option justify-content-center">
-      <a @click="openConfirm" class="delete_user underline"><b-icon icon="trash-fill" class="mr-2 mr-lg-3 delete_icon"></b-icon>Supprimer ce compte utilisateur</a>
+      <a @click="openConfirm" class="delete_user underline"><b-icon icon="trash-fill" class="mr-2 mr-lg-3 delete_icon"></b-icon>Supprimer cet utilisateur</a>
     </div>
     <ConfirmDialogue
       :reveal="revealConfirm"

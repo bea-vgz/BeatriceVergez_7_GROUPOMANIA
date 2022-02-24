@@ -48,7 +48,7 @@
             <AllLikesComment
             :post="post"
             :comment="comment" 
-            :likesCount="comment.Like_comments.length"
+            :likesNumber="comment.Like_comments.length"
             />
           </div>
         <button
@@ -73,7 +73,7 @@
           <AllLikesComment
           :post="post"
           :comment="comment" 
-          :dislikesCount="comment.Dislike_comments.length"
+          :dislikesNumber="comment.Dislike_comments.length"
           />
         </div>
         <button
@@ -118,8 +118,8 @@ export default {
       isEditing: false,
       likeThisComment: false,
       dislikeThisComment: false,
-      likesCount: '',
-      dislikesCount:'',
+      likesNumber: '',
+      dislikesNumber:'',
       currentUser:''
     }
   },

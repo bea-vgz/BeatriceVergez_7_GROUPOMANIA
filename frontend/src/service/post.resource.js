@@ -24,6 +24,9 @@ class PostService {
 
     modifyPost(postId, post) {
         return resource.put(`/posts/${postId}`, post, { headers: authHeader() })
+        .then(response => {
+            return response.data
+        })
     }
 }
 

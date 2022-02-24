@@ -4,7 +4,7 @@
       <form @submit.prevent="update" class="modifyProfil" v-if="currentUser">
         <div class="bg-white"></div>
           <div class="img">
-            <img :src="file || newUser.photoProfil" alt="Avatar" ref="file" type="file">
+            <img :src="file || currentUser.photoProfil" alt="Avatar" ref="file" type="file">
           </div>
           <b-form>
             <button
@@ -46,7 +46,7 @@
                   id="username"
                   type="text"
                   placeholder="Pseudo"
-                  v-model="newUser.username"
+                  v-model="currentUser.username"
                   class="text-dark mb-2 pl-lg-3"
                 ></b-form-input>
               </b-col>
@@ -60,12 +60,12 @@
                   id="bio"
                   type="text"
                   placeholder="Biographie"
-                  v-model="newUser.bio"
+                  v-model="currentUser.bio"
                   class="mb-2 pl-lg-3"
                 ></b-form-input>
               </b-col>
             </div>
-            <div v-if="newUser.isAdmin" class="d-flex align-items-center">
+            <div v-if="currentUser.isAdmin" class="d-flex align-items-center">
               <b-col sm="2" class="d-none d-lg-block p-0">
                 <label for="admin"><strong>  Statut </strong></label>
               </b-col>
@@ -107,15 +107,11 @@ export default {
       file: null,
       user:'',
       users:[],
-      newUser: {},
       currentUser: {}
     }
   },
   async mounted() {
     this.currentUser = await AuthService.getCurrentUser()
-  },
-  updated() {
-    this.newUser = this.currentUser;
   },
   methods: {
     ...mapActions(['displayNotification']),
@@ -125,18 +121,18 @@ export default {
       if(this.image && this.image != "") {
         user = new FormData();
         user.append('image', this.image);
-        user.append('username', this.newUser.username);
-        user.append('bio', this.newUser.bio);
+        user.append('username', this.currentUser.username);
+        user.append('bio', this.currentUser.bio);
       }
       else {
         user = {
-          username: this.newUser.username,
-          bio: this.newUser.bio
+          username: this.currentUser.username,
+          bio: this.currentUser.bio
         }
       }
-      AuthService.modifyUser(this.newUser.id, user)
+      AuthService.modifyUser(this.currentUser.id, user)
         .then(() => {
-          this.$store.dispatch('auth/getOneUser', this.newUser.id)
+          AuthService.getCurrentUser(this.currentUser.id, user)
           this.displayNotification('User modifié !')
         })
         .catch(error => {
@@ -146,7 +142,7 @@ export default {
     },
 
     onFileChange(event) {
-      this.newUser.photoProfil = URL.createObjectURL(event.target.files[0])
+      this.currentUser.photoProfil = URL.createObjectURL(event.target.files[0])
       this.image = event.target.files[0]
     },
     triggerInput () {

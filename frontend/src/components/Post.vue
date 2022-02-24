@@ -36,8 +36,8 @@
       <div class="button-dis-like d-flex" v-if="post.Like_posts && post.Dislike_posts">
         <AllLikesPost 
           :post="post" 
-          :likesCount="post.Like_posts.length"
-          :dislikesCount="post.Dislike_posts.length"
+          :likesNumber="post.Like_posts.length"
+          :dislikesNumber="post.Dislike_posts.length"
         />
       </div>
 
@@ -126,8 +126,8 @@ export default {
       comment: {},
       likeThisPost: false,
       dislikeThisPost: false,
-      likesCount: '',
-      dislikesCount:''
+      likesNumber: '',
+      dislikesNumber:''
     };
   },
   props: ['post'],
@@ -137,7 +137,7 @@ export default {
     ModifyPost,
   },
   async mounted() {
-    this.user = await AuthService.getCurrentUser()
+    this.currentUser = await AuthService.getCurrentUser()
     this.getLikeOnOnePost()
     this.getDislikeOnOnePost()
   },

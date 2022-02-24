@@ -11,7 +11,7 @@ export default {
       if (!newMessage) return
       this.$bvToast.toast(newMessage, {
         title: 'Notifications',
-        autoHideDelay: 4000
+        autoHideDelay: 2000
       })
     }
   },

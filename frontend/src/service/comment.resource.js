@@ -4,15 +4,7 @@ import authHeader from './auth.header'
 class CommentService {
 
     createComment(comment, postId) {
-        return resource.post(`/posts/${postId}/comments`, 
-        {
-            content: comment.content
-        },
-        { headers: authHeader() }
-        )
-        .then(response => {
-            console.log(response)
-        });
+        return resource.post(`/posts/${postId}/comments`, comment, { headers: authHeader() })
     }
 
     getPostsComments(postId){

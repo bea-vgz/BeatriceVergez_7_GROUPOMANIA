@@ -4,7 +4,7 @@
       <button
         v-b-modal="`modal-likes-${post.id}`"
         @click="getAllLikes"
-        v-if="likesCount > 0"
+        v-if="likesNumber > 0"
         class="like-btn d-flex align-items-center my-2 mt-lg-0 ml-2 text-left"
         aria-label="Afficher les likes"
       >
@@ -18,12 +18,12 @@
           />
         </svg>
       </div>
-      <span class="likes-number ml-2">{{ likesCount }} </span>
+      <span class="likes-number ml-2">{{ likesNumber }} </span>
       </button>
       <button
         v-b-modal="`modal-dislikes-${post.id}`"
         @click="getAllDislikes"
-        v-if="dislikesCount > 0"
+        v-if="dislikesNumber > 0"
         class="like-btn d-flex align-items-center my-2 mt-lg-0 ml-2 text-left"
         aria-label="Afficher les likes"
       >
@@ -37,11 +37,11 @@
           />
         </svg>
       </div>
-      <span class="likes-number ml-2">{{ dislikesCount }}</span>
+      <span class="likes-number ml-2">{{ dislikesNumber }}</span>
       </button>
     </div>
 
-    <b-modal v-if="likesCount" :id="`modal-likes-${post.id}`" :title="`${likesCount} personne(s) aime(nt) ce post`">
+    <b-modal v-if="likesNumber" :id="`modal-likes-${post.id}`" :title="`${likesNumber} personne(s) aime(nt) ce post`">
       <div v-for="like_post in likes" :key="like_post.id">
         <router-link
           :to="{ name: 'ProfilUser', params: { userId: like_post.UserId } }"
@@ -57,7 +57,7 @@
       </div>
       <div slot="modal-footer"></div>
     </b-modal>
-    <b-modal v-if="dislikesCount" :id="`modal-dislikes-${post.id}`" :title="`${dislikesCount} personne(s) n'aime(nt) pas ce post`">
+    <b-modal v-if="dislikesNumber" :id="`modal-dislikes-${post.id}`" :title="`${dislikesNumber} personne(s) n'aime(nt) pas ce post`">
       <div v-for="dislike_post in dislikes" :key="dislike_post.id">
         <router-link
           :to="{ name: 'ProfilUser', params: { userId: dislike_post.UserId } }"
@@ -81,7 +81,7 @@ import DislikePostService from '../service/dislike_post.resource'
 import LikePostService from '../service/like_post.resource'
 export default {
   name: 'AllLikesPost',
-  props: ['post', 'likesCount', 'dislikesCount'],
+  props: ['post', 'likesNumber', 'dislikesNumber'],
   data () {
     return {
       likes: [],
