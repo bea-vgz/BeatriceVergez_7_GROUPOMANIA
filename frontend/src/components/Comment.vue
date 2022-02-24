@@ -1,5 +1,8 @@
 <template>
   <div class="comment">
+    <p class="comment-date">
+      {{ getDateWithoutTime(comment.updatedAt) }}
+    </p>
     <div class="d-flex">
       <div class="UserAvatar" v-if="comment.User">
         <router-link :to="{ name: 'ProfilUser', params: { userId: comment.UserId } }" >
@@ -40,9 +43,6 @@
       </div>
     </div>
     <div class="footer-comment d-flex">
-      <p class="comment-date">
-        {{ getDateWithoutTime(comment.updatedAt) }}
-      </p>
       <div class="d-flex justify-content-around">
         <div class="button-dis-like d-flex" v-if="comment.Like_comments">
             <AllLikesComment
@@ -220,6 +220,7 @@ export default {
   font-size: 0.7rem;
   color: #747474;
   margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 .comment-box {
   background-color: #F2F2F2;
@@ -284,6 +285,7 @@ a {
 }
 .footer-comment {
   display: flex;
+  margin-left: 40px;
 }
 .like-comment, .dislike-comment {
   font-size: 0.7rem;

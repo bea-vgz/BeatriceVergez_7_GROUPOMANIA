@@ -11,7 +11,7 @@
               <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
               <p><strong>Email : </strong>{{ user.email }}</p>
               <p><strong>Biographie :</strong>{{ user.bio }}</p>
-              <AdminDeleteUser
+              <DeleteButtonAdmin
                 v-if="currentUser.isAdmin"
                 :user="user"
               />
@@ -22,11 +22,11 @@
       <div class="line mb-3"></div>
       <b-row class="row justify-content-center align-items-center flex-column">
         <b-col cols="12" lg="6" class="align-items-center">
-          <div class="posts" v-if="posts">
+          <p v-if="user.Posts == null" class="text-center"><strong>Ce membre n'a encore publié aucun post 😉</strong></p>
+          <div class="posts" v-else>
             <h2 class="text-center posts-title"><strong> • SES POSTS • </strong></h2>
             <AllPosts :userId="this.$route.params.userId" />
           </div>
-          <p v-else class="text-center"><strong>Ce membre n'a encore publié aucun post 😉</strong></p>
         </b-col>
       </b-row>
       <!-- Footer -->
@@ -40,14 +40,14 @@ import AllPosts from "../components/AllPosts.vue";
 import AuthService from '../service/auth.resource'
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
-import AdminDeleteUser from "../components/AdminDeleteUser.vue"
+import DeleteButtonAdmin from "../components/DeleteButtonAdmin.vue"
 export default {
   name: 'ProfilUser',
   components: {
     Header,
     Footer,
     AllPosts,
-    AdminDeleteUser
+    DeleteButtonAdmin
   },
   watch: {
     $route (to, from) {

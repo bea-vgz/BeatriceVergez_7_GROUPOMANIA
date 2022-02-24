@@ -18,7 +18,7 @@
 import { mapActions } from 'vuex'
 import ConfirmDialogue from '@/components/ConfirmDialogue.vue';
 export default {
-  name: 'AdminDeleteUser',
+  name: 'DeleteButtonAdmin',
   data() {
     return {
       revealConfirm: false,
