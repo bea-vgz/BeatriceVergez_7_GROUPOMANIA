@@ -11,8 +11,8 @@
             <div class="userInfo" v-if="currentUser">
               <p><strong>Pseudo : </strong>{{ currentUser.username }}</p>
               <p><strong>Email : </strong>{{ currentUser.email }}</p>
-              <p><strong>Biographie :</strong>{{ currentUser.bio }}</p>
-              <p><strong>Identifiant :</strong> {{ currentUser.id }}</p>
+              <p><strong>Biographie : </strong>{{ currentUser.bio }}</p>
+              <p><strong>Identifiant : </strong>{{ currentUser.id }}</p>
               <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
             </div>
             <div class="line mb-3"></div>

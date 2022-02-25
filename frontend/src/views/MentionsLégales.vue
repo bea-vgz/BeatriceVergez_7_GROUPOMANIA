@@ -2,6 +2,7 @@
     <div class="container__vue">
         <Header/>    
         <div class="container-mentions">
+        
             <img class="logo-groupo" src="../assets/groupomania_logo.png" alt="Groupomania"/>
             <div class="line mb-3"></div>
 
@@ -66,6 +67,7 @@
             <h2>6 - Droit applicable et attribution de juridiction.</h2>
 
             <p>Tout litige en relation avec l’utilisation du site <strong>https://github.com/bea-vgz/BeatriceVergez_7_GROUPOMANIA</strong> est soumis au droit français. En dehors des cas où la loi ne le permet pas, il est fait attribution exclusive de juridiction aux tribunaux compétents de ...</p>
+            
         </div>
         <Footer/>
     </div>
@@ -89,11 +91,13 @@
         justify-content: center;
         padding-bottom: 25px;
         margin-top: 3rem;
-        width: 60rem;
+        width: 75%;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
     h1 {
+        font-size: 30px;
         font-weight: 700;
         color: #e22600;
     }
@@ -111,5 +115,13 @@
         margin-top: 0.8rem;
         margin-bottom: 1rem;
         background-color: rgba(192, 192, 192, 0.5);
+    }
+    @media screen and (min-width: 280px) and (max-width: 769px) {
+        .logo-groupo {
+            display: none;
+        }
+        .line {
+            display: none;
+        }
     }
 </style>

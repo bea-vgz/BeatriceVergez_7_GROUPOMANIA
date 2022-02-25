@@ -8,9 +8,9 @@
             <div class="text-center userInfo">
               <img :src="user.photoProfil" alt="Photo de profil de l'user" class="avatarProfil">
               <h1>{{ user.username }}</h1>
-              <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
+              <p><strong>Membre depuis le : </strong>{{ getDateWithoutTime(user.createdAt) }}</p>
               <p><strong>Email : </strong>{{ user.email }}</p>
-              <p><strong>Biographie :</strong>{{ user.bio }}</p>
+              <p><strong>Biographie : </strong>{{ user.bio }}</p>
               <DeleteButtonAdmin
                 v-if="currentUser.isAdmin"
                 :user="user"
@@ -22,14 +22,13 @@
       <div class="line mb-3"></div>
       <b-row class="row justify-content-center align-items-center flex-column">
         <b-col cols="12" lg="6" class="align-items-center">
-          <p v-if="user.Posts == null" class="text-center"><strong>Ce membre n'a encore publié aucun post 😉</strong></p>
-          <div class="posts" v-else>
+          <div class="posts" v-if="user.Posts.length > 0">
             <h2 class="text-center posts-title"><strong> • SES POSTS • </strong></h2>
             <AllPosts :userId="this.$route.params.userId" />
           </div>
+          <p v-else class="text-center"><strong>Ce membre n'a encore publié aucun post 😉</strong></p>
         </b-col>
       </b-row>
-      <!-- Footer -->
       <Footer />
     </div>
   </div>
