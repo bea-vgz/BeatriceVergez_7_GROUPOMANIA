@@ -8,9 +8,9 @@
             <div class="text-center userInfo">
               <img :src="user.photoProfil" alt="Photo de profil de l'user" class="avatarProfil">
               <h1>{{ user.username }}</h1>
-              <p><strong>Membre depuis le : </strong>{{ getDateWithoutTime(user.createdAt) }}</p>
+              <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(user.createdAt) }}</p>
               <p><strong>Email : </strong>{{ user.email }}</p>
-              <p><strong>Biographie : </strong>{{ user.bio }}</p>
+              <p><strong>Biographie :</strong>{{ user.bio }}</p>
               <DeleteButtonAdmin
                 v-if="currentUser.isAdmin"
                 :user="user"
@@ -29,6 +29,7 @@
           <p v-else class="text-center"><strong>Ce membre n'a encore publié aucun post 😉</strong></p>
         </b-col>
       </b-row>
+      <!-- Footer -->
       <Footer />
     </div>
   </div>
@@ -57,7 +58,7 @@ export default {
   data () {
     return {
       userId:'',
-      user: {},
+      user: '',
       post: '',
       posts: [],
       currentUser: {}

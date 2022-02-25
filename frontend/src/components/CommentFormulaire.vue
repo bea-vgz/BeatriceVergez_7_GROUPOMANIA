@@ -45,7 +45,7 @@ export default {
     ...mapActions(['displayNotification']),
     createComment(){
       const postId = this.post.id;
-      const { comment } = CommentService.createComment(
+      const comment = CommentService.createComment(
       { content: this.content }, postId )
       .then(() => {
         this.content = ''

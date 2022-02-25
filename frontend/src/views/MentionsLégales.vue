@@ -26,7 +26,7 @@
 
             <p>Béatrice Walto - Groupomania : SARL est propriétaire des droits de propriété intellectuelle et détient les droits d’usage sur tous les éléments accessibles sur le site internet, notamment les textes, images, graphismes, logos, vidéos, architecture, icônes et sons.</p>
 
-            <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de Paul DUPONT - Groupomania : SARL.</p>
+            <p>Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de Béatrice Walto - Groupomania : SARL.</p>
 
             <p>Toute exploitation non autorisée du site ou de l’un quelconque des éléments qu’il contient sera considérée comme constitutive d’une contrefaçon et poursuivie conformément aux dispositions des articles L.335-2 et suivants du Code de Propriété Intellectuelle.</p>
 
@@ -44,8 +44,7 @@
 
             <h2>4 - CNIL et gestion des données personnelles</h2>
 
-            <p>Conformément aux dispositions de la loi 78-17 du 6 janvier 1978 modifiée, l’utilisateur du site <strong>https://github.com/bea-vgz/BeatriceVergez_7_GROUPOMANIA</strong> dispose d’un droit d’accès, de modification et de suppression des informations collectées. Pour exercer ce droit, envoyez un message à notre Délégué à la Protection des Données : Paul DUPONT - paul-dupont@groupomania.com.</p>
-
+            <p>Conformément aux dispositions de la loi 78-17 du 6 janvier 1978 modifiée, l’utilisateur du site <strong>https://github.com/bea-vgz/BeatriceVergez_7_GROUPOMANIA</strong> dispose d’un droit d’accès, de modification et de suppression des informations collectées. Pour exercer ce droit, envoyez un message à notre Délégué à la Protection des Données : Béatrice Walto - beatrice-w@groupomania.com
             <p>Pour plus d'informations sur la façon dont nous traitons vos données (type de données, finalité, destinataire...), lisez notre Politique de Confidentialité.</p>
 
             <p>Il est également possible de déposer une réclamation auprès de la CNIL.</p>

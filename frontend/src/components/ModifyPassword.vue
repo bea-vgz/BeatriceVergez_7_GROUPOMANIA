@@ -90,9 +90,8 @@
           const userId = this.currentUser.id
           AuthService.modifyPassword(userId, password)
           .then(() => {
-            this.currentUser.id
-            this.displayNotification('Mot de passe modifié avec succès !')
             router.push('/home');
+            this.displayNotification('Mot de passe modifié avec succès !')
           })
         }
         else {

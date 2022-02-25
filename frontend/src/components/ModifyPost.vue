@@ -16,7 +16,7 @@
       title="Modifier la publication"
       ok-title="Enregistrer"
       ok-variant="light"
-      @ok="updatePost"
+      @ok="modifyPost"
       ok-only
     >
     <b-form>
@@ -78,13 +78,12 @@ export default {
     onFileSelected(file) {
       this.image = file;
     },
-    updatePost(){
+    modifyPost(){
       const post = new FormData();
       post.append('image', this.image);
       post.append('content', this.post.content);
       PostService.modifyPost(this.post.id, post)
       .then(() => {
-        this.$store.dispatch('post/AllPostsStore')
         this.displayNotification('Post modifié !')
       })
     },

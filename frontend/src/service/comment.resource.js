@@ -18,7 +18,7 @@ class CommentService {
     modifyComment(postId, id, comment) {
         return resource.put(`/posts/${postId}/comments/${id}`, comment, { headers: authHeader() })
         .then(response => {
-          return response.data;
+          return response.comment
         });
     }
 }

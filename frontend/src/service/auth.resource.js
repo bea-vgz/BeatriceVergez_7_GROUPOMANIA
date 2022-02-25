@@ -41,14 +41,14 @@ class AuthService {
     modifyUser(id, user) {
       return resource.put(`/users/${id}`, user, { headers: authHeader() })
       .then(response => {
-        return response.data
+        return response.user
       })
     }
 
     modifyPassword(id, user) {
       return resource.put(`/users/${id}/password`, user, { headers: authHeader() })
       .then(response => {
-        return response.data
+        return response.user
       })
     }
 

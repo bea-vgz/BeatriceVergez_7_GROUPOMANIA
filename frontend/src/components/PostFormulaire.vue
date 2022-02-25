@@ -10,7 +10,7 @@
           <div class="textarea_form">
             <b-form-textarea
               :value="value"
-              @input="updateContent"
+              @input="modifyContent"
               id="content"
               :placeholder="`Quoi de beau, ${currentUser.username} ?`"
               aria-label="Écrire une publication"
@@ -102,7 +102,7 @@ export default {
     triggerInput() {
       this.$refs.fileInput.click()
     },
-    updateContent(value) {
+    modifyContent(value) {
       this.$emit('input', value)
     },
   },

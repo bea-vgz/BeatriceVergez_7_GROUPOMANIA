@@ -115,7 +115,6 @@ export default {
   },
   methods: {
     ...mapActions(['displayNotification']),
-
     update(){
       let user;
       if(this.image && this.image != "") {
@@ -132,7 +131,7 @@ export default {
       }
       AuthService.modifyUser(this.currentUser.id, user)
         .then(() => {
-          AuthService.getCurrentUser(this.currentUser.id, user)
+          this.$router.go()
           this.displayNotification('User modifié !')
         })
         .catch(error => {
@@ -140,7 +139,6 @@ export default {
           console.error("Il y a une erreur", error);
         })
     },
-
     onFileChange(event) {
       this.currentUser.photoProfil = URL.createObjectURL(event.target.files[0])
       this.image = event.target.files[0]
