@@ -13,7 +13,7 @@
                 <p><strong>Email : </strong>{{ currentUser.email }}</p>
                 <p><strong>Biographie : </strong>{{ currentUser.bio }}</p>
                 <p><strong>Identifiant : </strong>{{ currentUser.id }}</p>
-                <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
+                <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut : </strong>Admin</p></div>      
               </div>
               <div class="line mb-3"></div>
               <a title="Modifier mon profil" @click="displayModal" class="icone">

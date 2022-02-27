@@ -4,20 +4,14 @@
     <div class="signUp">
       <Signup />
     </div>
-  <!-- Footer -->
-    <div class="footer">
-      <Footer />
-    </div>
   </div>
 </template>
 
 <script>
-import Footer from '@/components/Footer.vue';
 import Signup from '@/components/Signup.vue'
 export default {
   name: 'Inscription',
   components: {
-    Footer,
     Signup
   }
 }

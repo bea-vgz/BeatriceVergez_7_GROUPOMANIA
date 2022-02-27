@@ -4,20 +4,14 @@
     <div class="login">
       <Login />
     </div>
-  <!-- Footer -->
-    <div class="footer">
-      <Footer />
-    </div>
   </div>
 </template>
 
 <script>
-import Footer from '../components/Footer.vue';
 import Login from '../components/Login.vue'
 export default {
   name: 'Connexion',
   components: {
-    Footer,
     Login
   }
 }
