@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 import { auth } from './auth.module';
 import { post } from './post.module';
-import notifications from './notification-module';
+import notifications from './notification.module';
 
 Vue.use(Vuex)
 
