@@ -4,7 +4,8 @@
 
 Il consiste à construire un réseau social interne pour les employés de la société Groupomania. La plateforme doit permettre des échanges entre les utilisateurs sur le modèle d'autres sites comme 9GAG ou encore Reddit.
 
-![logo_groupo](https://user-images.githubusercontent.com/74549220/155893826-3e0bb772-9c8f-40df-9cb6-f3fde45093b4.png)
+![groupomania_logo](https://user-images.githubusercontent.com/74549220/155893845-646578be-2c8a-4c8b-904e-3f5cd7841c22.png)
+
 
 __
 
