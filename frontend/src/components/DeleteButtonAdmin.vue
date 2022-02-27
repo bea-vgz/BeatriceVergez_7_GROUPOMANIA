@@ -40,6 +40,7 @@ export default {
       this.message = "Cette action est irréversible. Cela supprimera automatiquement tous les posts et commentaires.. Êtes-vous sûr de vouloir supprimer ce compte ?";
       this.action = "deleteAccountUser"
     },
+    
     closeConfirm(e) {
       if(e.target === e.currentTarget) {
         this.revealConfirm = false;

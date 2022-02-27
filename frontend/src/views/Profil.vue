@@ -2,34 +2,34 @@
   <div>
     <Header />
     <div class="profil">
-    <div class="container_account">
-      <AsideProfil />
-      <div class="info-profil justify-content-center align-items-center flex-column">
-        <b-col cols="12" class="align-items-center">
-          <div class="infoUser bg-white">
-            <h1><strong>Mon profil</strong> </h1>
-            <div class="userInfo" v-if="currentUser">
-              <p><strong>Pseudo : </strong>{{ currentUser.username }}</p>
-              <p><strong>Email : </strong>{{ currentUser.email }}</p>
-              <p><strong>Biographie : </strong>{{ currentUser.bio }}</p>
-              <p><strong>Identifiant : </strong>{{ currentUser.id }}</p>
-              <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
+      <div class="container_account">
+        <AsideProfil />
+        <div class="info-profil justify-content-center align-items-center flex-column">
+          <b-col cols="12" class="align-items-center">
+            <div class="infoUser bg-white">
+              <h1><strong>Mon profil</strong> </h1>
+              <div class="userInfo" v-if="currentUser">
+                <p><strong>Pseudo : </strong>{{ currentUser.username }}</p>
+                <p><strong>Email : </strong>{{ currentUser.email }}</p>
+                <p><strong>Biographie : </strong>{{ currentUser.bio }}</p>
+                <p><strong>Identifiant : </strong>{{ currentUser.id }}</p>
+                <div v-if="currentUser.isAdmin"><p for="admin"><strong>Statut :</strong>Admin</p></div>      
+              </div>
+              <div class="line mb-3"></div>
+              <a title="Modifier mon profil" @click="displayModal" class="icone">
+                <b-icon icon="pencil-fill" class="mr-2 mr-lg-2 modif_icon"></b-icon> 
+                Modifier mon profil
+              </a>
+              <modify-profil v-show="modifyProfil" @close="closeModal" />
             </div>
-            <div class="line mb-3"></div>
-            <a title="Modifier mon profil" @click="displayModal" class="icone">
-              <b-icon icon="pencil-fill" class="mr-2 mr-lg-2 modif_icon"></b-icon> 
-              Modifier mon profil
-            </a>
-            <modify-profil v-show="modifyProfil" @close="closeModal" />
-          </div>
-        </b-col>
-        <b-col v-if="currentUser" col-lg="12" class="align-items-center">
-          <AllPosts :userId="currentUser.id" />
-        </b-col>
+          </b-col>
+          <b-col v-if="currentUser" col-lg="12" class="align-items-center">
+            <AllPosts :userId="currentUser.id" />
+          </b-col>
+        </div>
       </div>
-    </div>
-  <!-- Footer -->
-    <Footer />
+    <!-- Footer -->
+      <Footer />
     </div>
   </div>
 </template>
@@ -42,7 +42,6 @@ import AllPosts from "../components/AllPosts.vue";
 import { mapActions } from 'vuex';
 import AsideProfil from "../components/AsideProfil.vue";
 import AuthService from "../service/auth.resource";
-
 export default {
   name: "Profil",
   components: {
@@ -71,6 +70,7 @@ export default {
     displayModal() {
       this.modifyProfil = true;
     },
+    
     closeModal() {
       this.modifyProfil = false;
     },

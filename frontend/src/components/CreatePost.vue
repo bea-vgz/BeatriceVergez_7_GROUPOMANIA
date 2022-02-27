@@ -29,9 +29,11 @@ export default {
   },
   methods: {
     ...mapActions(['displayNotification']),
+
     onFileSelected(file) {
       this.image = file
     },
+
     createPost(event) {
       const post = new FormData();
       post.append('image', this.image);
@@ -43,6 +45,7 @@ export default {
         this.resetForm(event)
       })
     },
+
     resetForm(event) {
       event.target.reset()
       this.content = ''
@@ -54,7 +57,4 @@ export default {
 </script>
 
 <style lang="scss">
-.custom-file-label {
-  text-align: left;
-}
 </style>

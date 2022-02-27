@@ -45,12 +45,12 @@
     <div class="footer-comment d-flex">
       <div class="d-flex justify-content-around">
         <div class="button-dis-like d-flex" v-if="comment.Like_comments">
-            <AllLikesComment
-            :post="post"
-            :comment="comment" 
-            :likesNumber="comment.Like_comments.length"
-            />
-          </div>
+          <AllLikesComment
+          :post="post"
+          :comment="comment" 
+          :likesNumber="comment.Like_comments.length"
+          />
+        </div>
         <button
           @click="likeOrNotComment"
           class="react-btn"
@@ -66,7 +66,6 @@
               fill="currentColor"
             />
           </div>
-
           <span :class="`like-comment ${likeThisComment ? 'blue' : ''}`"> J'aime</span>
         </button>
         <div class="button-dis-like d-flex" v-if="comment.Dislike_comments">
@@ -119,8 +118,8 @@ export default {
       likeThisComment: false,
       dislikeThisComment: false,
       likesNumber: '',
-      dislikesNumber:'',
-      currentUser:''
+      dislikesNumber: '',
+      currentUser: {}
     }
   },
   async mounted() {
@@ -129,28 +128,33 @@ export default {
     this.currentUser = await AuthService.getCurrentUser();
   },
   methods: {
-     ...mapActions(['displayNotification']),
+    ...mapActions(['displayNotification']),
+
     getDateWithoutTime(date) {
       return require("moment")(date).format("DD-MM-YYYY HH:mm");
     },
+
     startEditing() {
       this.isEditing = true
     },
+
     newline () {
       this.comment.content = `${this.comment.content}\n`
     },
+
     deleteComment() {
-        const comment = this.comment.id
-        const postId = this.post.id;
-        CommentService.deleteComment(postId, comment)
-        .then(() => {
-          this.$emit('commentDeleted', this.comment)
-          this.displayNotification('Commentaire supprimé !')
-        },
-        error => {
-          console.log(error);
-        });
+      const comment = this.comment.id
+      const postId = this.post.id;
+      CommentService.deleteComment(postId, comment)
+      .then(() => {
+        this.$emit('commentDeleted', this.comment)
+        this.displayNotification('Commentaire supprimé !')
+      },
+      error => {
+        console.log(error);
+      });
     },
+
     modifyComment() {
       const postId = this.post.id;
       const comment = this.comment.id
@@ -165,6 +169,7 @@ export default {
         console.log(error);
       });
     },
+
     async likeOrNotComment() {
       const commentId = this.comment.id;
       const res = await LikeCommentService.likeComment(commentId)
@@ -173,6 +178,7 @@ export default {
       }
       this.likeThisComment = res.data.like
     },
+
     async dislikeOrNotComment() {
       const commentId = this.comment.id;
       const res = await DislikeCommentService.dislikeComment(commentId)
@@ -181,6 +187,7 @@ export default {
       }
       this.dislikeThisComment = res.data.dislike
     },
+
     getLikeOnOneComment(){
     const commentId = this.comment.id;
       LikeCommentService.getLikeOnOneComment(commentId)
@@ -188,6 +195,7 @@ export default {
         this.likeThisComment = res.data.like
       ))
     },
+    
     getDislikeOnOneComment(){
     const commentId = this.comment.id;
       DislikeCommentService.getDislikeOnOneComment(commentId)

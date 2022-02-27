@@ -15,7 +15,6 @@
         :post="post"
       />
     </div>
-
     <CommentFormulaire 
       @commentCreated="AllPostsComments"
       :post="post" 
@@ -42,7 +41,7 @@ export default {
     }
   },
   async mounted() {
-    this.user = await AuthService.getCurrentUser()
+    this.currentUser = await AuthService.getCurrentUser()
   },
   methods: {
     AllPostsComments() {
@@ -52,12 +51,14 @@ export default {
         this.comments = res.data,
         this.allCommentsDisplayed = true ))
     },
+    
     getDateWithoutTime(date) {
       return require("moment")(date).format("DD-MM-YYYY HH:mm");
     },
   },
 }
 </script>
+
 <style lang="scss">
 .display-comments {
   color: #747474;

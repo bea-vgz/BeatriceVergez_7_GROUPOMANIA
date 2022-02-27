@@ -1,3 +1,5 @@
+// Utilisation des cookies pour chaque requêtes contenant le token pour authentification
+// JavaScript Cookie
 import Cookies from 'js-cookie'
 
 export default function authHeader() {

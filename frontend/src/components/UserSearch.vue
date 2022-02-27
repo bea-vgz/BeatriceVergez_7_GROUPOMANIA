@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      :class="`search-bar ${visible ? '' : 'd-none'} d-lg-block`"
-    >
+    <div :class="`search-bar ${visible ? '' : 'd-none'} d-lg-block`">
       <div class="search-bar__content input-group d-flex align-items-center">
         <span class="search-btn input-group-append bg-transparent border-0 p-0">
           <b-icon icon="search" class="mr-2"></b-icon>
@@ -17,10 +15,7 @@
         />
       </div>
     </div>
-    <div
-      v-if="users.length"
-      class="users-list card border-0 position-fixed"
-    >
+    <div v-if="users.length" class="users-list card border-0 position-fixed">
       <div v-for="user in users" :key="user.username">
         <router-link :to="{ name: 'ProfilUser', params: { userId: user.id }}">
           <div class="d-flex align-items-center">
@@ -44,7 +39,7 @@ export default {
     return {
       search: '',
       users: [],
-      user:'',
+      user: '',
       visible: false
     }
   },
@@ -60,8 +55,8 @@ export default {
         this.users = []
         return
       }
-      const res = await this.$store.dispatch('auth/getAllUsers', value)
-      this.users = res.data
+      const response = await this.$store.dispatch('auth/getAllUsers', value)
+      this.users = response.data
     }
   },
 }

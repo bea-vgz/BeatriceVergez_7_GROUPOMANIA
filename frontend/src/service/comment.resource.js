@@ -19,7 +19,7 @@ class CommentService {
         return resource.put(`/posts/${postId}/comments/${id}`, comment, { headers: authHeader() })
         .then(response => {
           return response.comment
-        });
+        })
     }
 }
 export default new CommentService();

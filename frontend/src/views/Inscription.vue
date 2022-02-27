@@ -2,15 +2,12 @@
   <div class="Inscription">
   <!-- Signup -->
     <div class="signUp">
-    <Signup />
+      <Signup />
     </div>
-
   <!-- Footer -->
     <div class="footer">
-    <Footer />
+      <Footer />
     </div>
-
-  <router-view />
   </div>
 </template>
 

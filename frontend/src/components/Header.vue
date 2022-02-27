@@ -8,31 +8,30 @@
           <UserSearch />
         </div>
       </div>
-        <div class="accessPosts">
-          <router-link to="/home" aria-label="Fil d'actualité" class="nav_centrale text-decoration-none"><b-icon icon="house-door" class="mr-2 mr-lg-2"></b-icon>ACCUEIL</router-link>
-        </div>
-
-        <div class="notifUser">
-          <div class="menu-item" @click="isOpen = !isOpen" >
-            <button class="accessUser">
-              <img v-if="currentUser.photoProfil" :src="currentUser.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
-              <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar icone" alt="Avatar"/>
-              <span class="username">
-                <strong style="text-transform: uppercase"> {{ currentUser.username }} </strong>
-              </span>
-            </button>
-            <transition name="fade" apear>
-              <div class="sub-menu" v-if="isOpen">
-                <div class="menu-item">
-                  <router-link to="/profil"><b-icon icon="person-circle" class="mr-2 mr-lg-2"></b-icon>Mon compte</router-link>
-                </div>
-                <div class="menu-item">
-                  <a @click="logout" class="text-decoration-none"><b-icon icon="box-arrow-in-left" class="mr-2 mr-lg-2"></b-icon> Me déconnecter </a>
-                </div>
+      <div class="accessPosts">
+        <router-link to="/home" aria-label="Fil d'actualité" class="nav_centrale text-decoration-none"><b-icon icon="house-door" class="mr-2 mr-lg-2"></b-icon>ACCUEIL</router-link>
+      </div>
+      <div class="notifUser">
+        <div class="menu-item" @click="isOpen = !isOpen" >
+          <button class="accessUser">
+            <img v-if="currentUser.photoProfil" :src="currentUser.photoProfil"  class="avatar icone" alt="Avatar" ref="file" type="file"/>
+            <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar icone" alt="Avatar"/>
+            <span class="username">
+              <strong style="text-transform: uppercase"> {{ currentUser.username }} </strong>
+            </span>
+          </button>
+          <transition name="fade" apear>
+            <div class="sub-menu" v-if="isOpen">
+              <div class="menu-item">
+                <router-link to="/profil"><b-icon icon="person-circle" class="mr-2 mr-lg-2"></b-icon>Mon compte</router-link>
               </div>
-            </transition>
-          </div>
+              <div class="menu-item">
+                <a @click="logout" class="text-decoration-none"><b-icon icon="box-arrow-in-left" class="mr-2 mr-lg-2"></b-icon> Me déconnecter </a>
+              </div>
+            </div>
+          </transition>
         </div>
+      </div>
     </div>
     <MenuBurger />
   </div>
@@ -45,7 +44,6 @@ import MenuBurger from "../components/MenuBurger.vue"
 import UserSearch from '../components/UserSearch';
 import AuthService from "../service/auth.resource"
 export default {
-  
   name: 'Header',
   data() {
     return {
@@ -65,11 +63,13 @@ export default {
   },
   methods: {
     ...mapActions(['displayNotification']),
+
     async logout() {
       this.$store.dispatch('auth/logout');
       this.displayNotification('Vous avez été déconnecté.')
       router.push('/');
     },
+    
     scrollToTop() {
       window.scrollTo({
         top:0,

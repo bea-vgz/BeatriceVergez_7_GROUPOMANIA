@@ -55,6 +55,7 @@
     </b-collapse>
   </div>
 </template>
+
 <script>
 export default {
   name: 'EditButton',
@@ -78,9 +79,11 @@ export default {
     toggleActions () {
       this.areActionsVisible = !this.areActionsVisible
     },
+
     async onDelete () {
       this.$emit('onDelete')
     },
+    
     async clickedEditButton () {
       this.$emit('clickedEditButton')
     }

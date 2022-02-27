@@ -1,22 +1,21 @@
 import AuthService from '../service/auth.resource';
 
-  export const auth = {
-    namespaced: true,
-    state: {
-      statut: '',
-      user: {},
-      userInfos: {
-        id:'',
-        username: '',
-        email: '',
-        bio: '',
-        photoProfil: '',
-        isAdmin: '',
-      },
-      users:[],
-      token: null,
-      isAdmin: false,
+export const auth = {
+  namespaced: true,
+  state: {
+    statut: '',
+    user: {
+      id:'',
+      username: '',
+      email: '',
+      bio: '',
+      photoProfil: '',
+      isAdmin: '',
     },
+    users:[],
+    token: null,
+    isAdmin: false,
+  },
   actions: {
     login({ commit }, user) {
       return AuthService.login(user)
@@ -25,7 +24,7 @@ import AuthService from '../service/auth.resource';
           return Promise.resolve(user);
         },
         error => {
-          commit('loginFailure');
+          commit('messageFailure');
           return Promise.reject(error);
         }
       );
@@ -40,11 +39,11 @@ import AuthService from '../service/auth.resource';
       return AuthService.signup(user)
       .then(response => {
           commit('registerSuccess');
-          return Promise.resolve(response.data);
+          return Promise.resolve(response);
         },
         error => {
-          commit('registerFailure');
-          return Promise.reject(error.response.data);
+          commit('messageFailure');
+          return Promise.reject(error.response);
         }
       );
     },
@@ -56,7 +55,7 @@ import AuthService from '../service/auth.resource';
           return Promise.resolve(response);
         },
         (error) => {
-          commit ('deleteFailure')
+          commit ('messageFailure')
           return Promise.reject(error)
         }
       )
@@ -69,7 +68,7 @@ import AuthService from '../service/auth.resource';
         return Promise.resolve(users);
       },
       (error) => {
-        commit('getUsersFailure')
+        commit('messageFailure')
         return Promise.reject(error)
       })
     },
@@ -79,35 +78,21 @@ import AuthService from '../service/auth.resource';
     loginSuccess(state, user) {
       state.user = user;
     },
-    loginFailure(state) {
-      state.user = null;
-    },
     logout(state) {
       state.user = null;
     },
     registerSuccess(state, user) {
       state.user = user;
     },
-    registerFailure(state) {
-      state.user = null;
-    },
     deleteSuccess(state) {
       state.user = null
-    },
-    deleteFailure(state, message) {
-      state.message = message
-    },
-    updateSuccess(state, user) {
-      state.user = user;
-      state.message = "Profil modifié !";
     },
     getUsers(state, users) {
       state.users = users;
       state.message = "Users récupérés !";
     },
-    getUsersFailure(state) {
-      state.users = null;
-      state.message = "Users non récupérés !";
-    },
+    messageFailure(state, message) {
+      state.message = message
+    }
   }
 }

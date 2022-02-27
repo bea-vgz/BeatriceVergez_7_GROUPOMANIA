@@ -25,6 +25,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import CommentService from '../service/comment.resource';
 import AuthService from "../service/auth.resource";
@@ -43,6 +44,7 @@ export default {
   },
   methods: {
     ...mapActions(['displayNotification']),
+
     createComment(){
       const postId = this.post.id;
       const comment = CommentService.createComment(
@@ -53,12 +55,14 @@ export default {
         this.displayNotification('Commentaire créé !')
       })
     },
+
     newline () {
       this.content= `${this.content}\n`
     },
   }
 };
 </script>
+
 <style scoped>
 .container_comments {
   display: flex;

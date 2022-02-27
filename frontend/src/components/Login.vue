@@ -7,36 +7,35 @@
         <p>- Connectez-vous et échangez avec vos collègues 🤓 🖥️ -</p>
       </div>
     </section>
-
     <form class="formulaire" @submit.prevent="login">
       <h2>Se connecter</h2>
-    <!-- Email input -->
+      <!-- Email -->
       <label for="email">  📧  Email * : </label>
       <div class="d-flex">
         <input type="text" id="email" name="email" v-model="user.email" autocomplete="email" placeholder="Email (pseudo)" required="required" >
         <span class="input-group-text">@groupomania.com</span>
       </div>
-    <!-- Password input -->
+      <!-- Password -->
       <label for="password"> 🔒  Mot de passe * : 
         <button type="button" class="buttonEyes" @click="show = !show" aria-role="img">
-          <font-awesome-icon icon="eye" alt="mot de passe visible" class="eyes" v-show="show" />
-          <font-awesome-icon icon="eye-slash" alt="mot de passe invisible" class="eyes" v-show="!show" />
+          <b-icon icon="eye-fill" alt="mot de passe visible" class="eyes" v-show="show" />
+          <b-icon icon="eye-slash-fill" alt="mot de passe invisible" class="eyes" v-show="!show" />
         </button>
       </label>
       <input id="password" name="password" v-model="user.password" placeholder="Mot de passe" required="required" :type="show ? 'text' : 'password'"/>
         
       <p class="champs"><strong>Les champs indiqués par une * sont obligatoires</strong></p>
-
+      
+      <!-- Button connexion -->
       <button type="submit" class="buttonConnect" aria-label="se connecter">
         <router-link to="/home" style="text-decoration: none; color: inherit;"><strong> Connexion </strong></router-link>
       </button>
-
+      <!-- Link vers la page d'inscription si pas de compte -->
       <button type="submit" value="Submit" class="buttonCompte" >
         <router-link style="text-decoration: none; color: inherit;" to="/signup"> Pas encore de compte ? Je m'inscris </router-link>
       </button>
     </form>
   </div>
-
 </template>
 
 <script>
@@ -44,7 +43,6 @@ import router from "../router";
 import Cookies from 'js-cookie'
 export default {
   name: 'Login',
-  
   data() {
     return {
       user: {
@@ -63,7 +61,7 @@ export default {
       if (this.user.email && this.user.password) {
         this.$store.dispatch('auth/login', user)
         .then(user => {
-          Cookies.set('userToken_groupomania', user.token, { expires: 1 });
+          Cookies.set('userToken_groupomania', user.token, { expires: 1 }); // Envoi du token pour authentification
           router.push('/home');
         },
         error => {
@@ -77,7 +75,6 @@ export default {
 </script>
 
 <style scoped>
-
 #loginUser {
   display: flex;
   justify-content: space-around;
@@ -188,7 +185,6 @@ input {
   margin-left: 0.7rem;
   background: none
 }
-
 @media screen and (min-width: 280px) and (max-width: 769px) {
   #loginUser {
     display: flex;
@@ -212,7 +208,6 @@ input {
     margin: 0;
   }
 }
-
 @media screen and (min-width: 780px) and (max-width: 1180px) {
   #loginUser {
     display: flex;

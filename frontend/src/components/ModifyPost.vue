@@ -19,13 +19,13 @@
       @ok="modifyPost"
       ok-only
     >
-    <b-form>
-      <PostFormulaire
-        :image="post.image"
-        @onFileSelected="onFileSelected"
-        v-model="post.content"
-      />
-    </b-form>
+      <b-form>
+        <PostFormulaire
+          :image="post.image"
+          @onFileSelected="onFileSelected"
+          v-model="content"
+        />
+      </b-form>
     </b-modal>
     </EditButton>
     <ConfirmDialogue
@@ -58,32 +58,37 @@ export default {
     return {
       image: '',
       file: '',
+      content: '',
       revealConfirm: false,
-      titleModal: "",
-      action: "",
-      message:"",
-      user:'',
+      titleModal: '',
+      action: '',
+      message: '',
       currentUser: {}
     }
   },
   async mounted() {
     this.currentUser = await AuthService.getCurrentUser();
     this.image = this.post.image;
+    this.content = this.post.content;
   },
   methods: {
     ...mapActions(['displayNotification']),
+
     toggleActions () {
       this.areActionsVisible = !this.areActionsVisible
     },
+
     onFileSelected(file) {
       this.image = file;
     },
+
     modifyPost(){
       const post = new FormData();
       post.append('image', this.image);
-      post.append('content', this.post.content);
+      post.append('content', this.content);
       PostService.modifyPost(this.post.id, post)
       .then(() => {
+        this.$router.go()
         this.displayNotification('Post modifié !')
       })
     },
@@ -94,6 +99,7 @@ export default {
       this.message = "Cette action est irréversible. Êtes-vous sûr de vouloir supprimer votre post ?";
       this.action = 'deletePost';
     },
+
     closeConfirm(e) {
       if(e.target === e.currentTarget) {
         this.revealConfirm = false;

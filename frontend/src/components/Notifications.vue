@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState} from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'Notifications',
   watch: {
@@ -17,6 +17,7 @@ export default {
   },
   computed: {
     ...mapState(['notifications']),
+
     message () {
       return this.notifications.message
     }

@@ -5,9 +5,9 @@
                 <h2>{{ title ? title : "" }}</h2>
                 <i class="fas fa-times" @click="closeConfirm"></i>
             </header>
-            <main>
+            <div>
                 <p>{{ message ? message : "" }}</p>
-            </main>
+            </div>
             <footer>
                 <a aria-role="button" class="cancel" @click="closeConfirm">Annuler</a>
                 <a aria-role="button" class="confirm" @click="confirm">Confirmer</a>
@@ -36,6 +36,7 @@ export default {
         closeConfirm(event) {
             this.$emit('closeConfirm', event);
         },
+
         confirm() {
             if(this.action == "deleteUser") {
                 let payload = this.$store.state.auth.user.id
@@ -72,6 +73,7 @@ export default {
     }
 }
 </script>
+
 <style scoped>
 .modal-box {
     background-color: rgba(0, 0, 0, 0.568);
@@ -85,7 +87,6 @@ export default {
     align-items: center;
     z-index: 2;
 }
-
 .modal-box .modal-content {
     background: #fff;
     border-radius: 2rem;
@@ -95,7 +96,6 @@ export default {
     margin-right: auto;
     padding: 2rem;
 }
-
 .modal-box .modal-content .title {
     align-items: center;
     justify-content: space-between;
@@ -106,44 +106,37 @@ export default {
     z-index: 10;
     background-color: #fff;
 }
-
 .modal-box .modal-content .title h2 {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 1rem;
     text-align: center;
 }
-
 .modal-box .modal-content .title i {
     font-size: 25px;
     color: rgba(0, 0, 0, .5);
     cursor: pointer;
 }
-
 .modal-box .modal-content .user {
     display: flex;
     align-items: center;
     padding: 20px;
 }
-
 .modal-box .modal-content .user img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 20px;
 }
-
-.modal-box.confirm-box main p {
+.modal-box.confirm-box div p {
     margin: 20px;
 }
-
 .modal-box.confirm-box footer {
     padding: 16px 100px;
     border-top: 1px solid rgba(0, 0, 0, .08);
     display: flex;
     justify-content: flex-end;
 }
-
 .modal-box.confirm-box footer a {
     padding: 4px 15px;
     border: 2px solid;
@@ -153,27 +146,22 @@ export default {
     cursor: pointer;
     transition: .3s ease;
 }
-
 .modal-box.confirm-box footer a:not(:last-child) {
     margin-right: 10px;
 }
-
 .modal-box.confirm-box footer a.cancel {
     border-color: crimson;
     background-color: crimson;
 }
-
 .modal-box.confirm-box footer a.confirm {
     border-color: #038a03;
     background-color: #038a03;
 }
-
 .modal-box.confirm-box footer a.cancel:hover {
     background: none;
     text-decoration: none;
     color: crimson;
 }
-
 .modal-box.confirm-box footer a.confirm:hover {
     background: none;
     text-decoration: none;

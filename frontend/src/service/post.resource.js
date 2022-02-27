@@ -22,8 +22,8 @@ class PostService {
         return resource.delete(`/posts/${id}`, { headers: authHeader() })
     }
 
-    modifyPost(postId, post) {
-        return resource.put(`/posts/${postId}`, post, { headers: authHeader() })
+    modifyPost(id, post) {
+        return resource.put(`/posts/${id}`, post, { headers: authHeader() })
         .then(response => {
             return response.post
         })

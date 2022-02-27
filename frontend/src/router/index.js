@@ -26,29 +26,27 @@ const routes = [
     component: () => import("../views/Home.vue"),
     meta: { title: 'Groupomania' }
   },
-// Route Profil user 
+  // Route Profil user 
   {
     path: "/profil",
     name: "Profil",
     component: () => import("../views/Profil.vue"),
     meta: { title:'Groupomania - Mon compte' }
-},
+  },
   // Route password user 
   {
     path: "/password",
     name: "Password",
     component: () => import("../components/ModifyPassword.vue"),
-    meta: { title:'Groupomania - modification Password' }
+    meta: { title:'Groupomania - Modification Password' }
   },
-  
   // Route User profil 
   {
     path: '/profil/:userId',
     name: 'ProfilUser',
     component: () => import('../views/ProfilUser.vue'),
-    meta: { title:'Groupomania - profil collègue' }
+    meta: { title:'Groupomania - Profil collègue' }
   },
-
   // Route Mentions légales
   {
     path: '/mentions',
@@ -60,7 +58,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
-  scrollBehavior() {
+  scrollBehavior() { // Scroll vers le haut de la page 
     return {x: 0, y: 0}
   }
 })

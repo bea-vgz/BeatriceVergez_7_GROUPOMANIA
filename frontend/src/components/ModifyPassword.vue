@@ -8,97 +8,96 @@
           <div class="infoUser bg-white">
             <h1><strong>Mot de passe</strong></h1>
             <div class="card">
-            <div>
-              <label for="password"> 🔒  Mot de passe actuel : </label>
-              <div class="inputPassword">
-                <input v-if="currentUser" v-model="currentUser.password" placeholder="Mot de passe actuel" class="form-row_input" id="password" type='password' />
+              <div>
+                <label for="password"> 🔒  Mot de passe actuel : </label>
+                <div class="inputPassword">
+                  <input v-if="currentUser" v-model="currentUser.password" placeholder="Mot de passe actuel" class="form-row_input" id="password" type='password' />
+                </div>
+              </div>
+              <div>
+                <label for="newPassword"> 🔒  Nouveau mot de passe : </label>
+                <div class="inputPassword">
+                  <input v-model="newPassword" class="form-row_input" id="newPassword" placeholder="Votre nouveau mot de passe" :type="show ? 'text' : 'password'" />
+                  <button type="button" class="buttonEyes" @click="show = !show" >
+                    <b-icon icon="eye-fill" alt="mot de passe visible" class="eyes text-color" v-show="show" />
+                    <b-icon icon="eye-slash-fill" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
+                  </button>
+                </div>
+              </div>
+              <div>
+                <label for="confirmPassword">🔒  Confirmer le mot de passe : </label>
+                <div class="inputPassword">
+                  <input v-model="confirmPassword" class="form-row_input" id="confirmPassword" placeholder="Confirmez votre nouveau mot de passe" :type="show ? 'text' : 'password'" />
+                  <button type="button" class="buttonEyes" @click="show = !show" >
+                    <b-icon icon="eye-fill" alt="mot de passe visible" class="eyes text-color" v-show="show" />
+                    <b-icon icon="eye-slash-fill" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
+                  </button>
+                </div>
+              </div>
+              <button class="buttonSave save-btn d-lg-block"  aria-label="Sauvegarder" type="submit" @click="modifyPassword()">
+                <router-link to="/profil" class="save">Sauvegarder</router-link>
+              </button>
+              <div v-if="message">
+                {{ message }}
               </div>
             </div>
-            <div>
-              <label for="newPassword"> 🔒  Nouveau mot de passe : </label>
-              <div class="inputPassword">
-                <input v-model="newPassword" class="form-row_input" id="newPassword" placeholder="Votre nouveau mot de passe" :type="show ? 'text' : 'password'" />
-                <button type="button" class="buttonEyes" @click="show = !show" >
-                  <font-awesome-icon icon="eye" alt="mot de passe visible" class="eyes text-color" v-show="show" />
-                  <font-awesome-icon icon="eye-slash" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
-                </button>
-              </div>
-            </div>
-            <div>
-              <label for="confirmPassword">🔒  Confirmer le mot de passe : </label>
-              <div class="inputPassword">
-                <input v-model="confirmPassword" class="form-row_input" id="confirmPassword" placeholder="Confirmez votre nouveau mot de passe" :type="show ? 'text' : 'password'" />
-                <button type="button" class="buttonEyes" @click="show = !show" >
-                  <font-awesome-icon icon="eye" alt="mot de passe visible" class="eyes text-color" v-show="show" />
-                  <font-awesome-icon icon="eye-slash" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
-                </button>
-              </div>
-            </div>
-            <button class="buttonSave save-btn d-lg-block"  aria-label="Sauvegarder" type="submit" @click="modifyPassword()">
-              <router-link to="/profil" class="save">Sauvegarder</router-link>
-            </button>
-            <div v-if="message">
-              {{ message }}
-            </div>
-          </div>
           </div>
         </b-col>
       </div>
     </div>
-    <!-- Footer -->
     <div class="footer">
-        <Footer />
+      <Footer />
     </div>
-  <router-view />
   </div>
 </template>
 
 <script>
-  import { mapActions } from 'vuex'
-  import router from "../router";
-  import Header from '@/components/Header'
-  import Footer from '@/components/Footer'
-  import AuthService from "../service/auth.resource"
-  import AsideProfil from "../components/AsideProfil.vue"
-  export default {
-    name: 'ModifyPassword',
-    components: {
-      Header,
-      Footer,
-      AsideProfil
-    },
-    props: ['user'],
-    data () {
-      return {
-        newPassword: '',
-        confirmPassword:'',
-        show: false,
-        message:'',
-        currentUser: {}
+import { mapActions } from 'vuex'
+import router from "../router";
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import AuthService from "../service/auth.resource"
+import AsideProfil from "../components/AsideProfil.vue"
+export default {
+  name: 'ModifyPassword',
+  components: {
+    Header,
+    Footer,
+    AsideProfil
+  },
+  props: ['user'],
+  data () {
+    return {
+      newPassword: '',
+      confirmPassword:'',
+      show: false,
+      message:'',
+      currentUser: {}
+    }
+  },
+  async mounted() {
+    this.currentUser = await AuthService.getCurrentUser()
+  },
+  methods: {
+    ...mapActions(['displayNotification']),
+
+    modifyPassword() {
+      if (this.newPassword === this.confirmPassword) {
+        const password = {
+          password: this.newPassword,
+        }
+        const userId = this.currentUser.id
+        AuthService.modifyPassword(userId, password)
+        .then(() => {
+          router.push('/home');
+          this.displayNotification('Mot de passe modifié avec succès !')
+        })
+      }
+      else {
+        console.log(this.message = "Le mot de passe n'a pas pu être mis à jour")
+        alert("Oups, une erreur est survenue")
       }
     },
-    async mounted() {
-      this.currentUser = await AuthService.getCurrentUser()
-    },
-    methods: {
-      ...mapActions(['displayNotification']),
-      modifyPassword() {
-        if (this.newPassword === this.confirmPassword) {
-          const password = {
-            password: this.newPassword,
-          }
-          const userId = this.currentUser.id
-          AuthService.modifyPassword(userId, password)
-          .then(() => {
-            router.push('/home');
-            this.displayNotification('Mot de passe modifié avec succès !')
-          })
-        }
-        else {
-          console.log(this.message = "Le mot de passe n'a pas pu être mis à jour")
-          alert("Oups, une erreur est survenue")
-        }
-      },
   },
 }
 </script>

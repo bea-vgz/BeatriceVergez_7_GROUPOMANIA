@@ -43,7 +43,7 @@ exports.dislikePost = async (req, res, next) => {
       })
     }
     else {
-      res.status(400).json({ msg: "Vous ne pouvez pas disliker ce post. Vous devez d'abord enlever votre vote" });
+      res.status(400).json({ message: "Vous ne pouvez pas disliker ce post. Vous devez d'abord enlever votre vote" });
     }
   }
   catch (error) {

@@ -1,31 +1,27 @@
 <template>
   <div>
-
     <Header />
     <div class="container_home">
-
-    <div class="wrapper">
-      <div class="wrapper__text text-align">
-      <h1 class="text text_hello">Hello,</h1>
+      <div class="wrapper">
+        <div class="wrapper__text text-align">
+          <h1 class="text text_hello">Hello,</h1>
+        </div>
+        <div class="wrapper__text text-align">
+          <h1 class="text text--highlight animate-delay-3">Bienvenue sur votre fil d'actualité <br /></h1>
+        </div>
+        <div v-if="currentUser" class="wrapper__text text-align">
+          <h1 class="text text--highlight animate-delay-6">{{ currentUser.username }} ! 😁</h1>
+        </div>
+      </div>
+      <CreatePost />
+      <b-row class="row justify-content-center align-items-center flex-column">
+        <b-col cols="12" lg="6" class="align-items-center">
+          <AllPosts />
+        </b-col>
+      </b-row>
     </div>
-    <div class="wrapper__text text-align">
-      <h1 class="text text--highlight animate-delay-3">Bienvenue sur votre fil d'actualité <br /></h1>
-    </div>
-    <div v-if="currentUser" class="wrapper__text text-align">
-      <h1 class="text text--highlight animate-delay-6">{{ currentUser.username }} ! 😁</h1>
-    </div>
-    </div>
-    
-    <CreatePost />
-    
-    <b-row class="row justify-content-center align-items-center flex-column">
-      <b-col cols="12" lg="6" class="align-items-center">
-        <AllPosts />
-      </b-col>
-    </b-row>
-    </div>
- <!-- Footer -->
-  <Footer />
+  <!-- Footer -->
+    <Footer />
   </div>
 </template>
 
@@ -77,7 +73,6 @@ h1 {
   margin-left: 1rem;
   margin-right: 1rem;
 }
-
 body {
   position: relative;
 }
@@ -105,13 +100,11 @@ body {
   font-weight: bolder;
   color: #e22600;
 }
-
 @keyframes animate {
   0% {
     opacity: 0;
     transform: translateY(30vh);
   }
-
   100% {
     opacity: 1;
     transform: translateY(0%);

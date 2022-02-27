@@ -1,37 +1,37 @@
 <template>
-    <aside class="profil_account bg-white sidebar">
-        <div class="sidebar__widget">
-          <div class="contanier_presentation bg-white border-b py-8">
-            <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
-            <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar" alt="Avatar" />
-            <h1 class="username">{{ currentUser.username }}</h1>
-            <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(currentUser.createdAt) }}</p>
-          </div>
-          <div class="optionsProfil bg-white">
-            <div class="option"> 
-              <router-link to="/profil" class="nav_centrale underline"><b-icon icon="person-circle" class="mr-2 mr-lg-2"></b-icon> Mon compte</router-link>
-            </div>
-            <div class="option">
-              <router-link to="/password" class="nav_centrale underline"><b-icon icon="pencil-square" class="mr-2 mr-lg-2"></b-icon> Modifier mot de passe</router-link>
-            </div>
-            <div class="option">
-              <a @click="logout" class="text-decoration-none underline"><b-icon icon="box-arrow-in-left" class="mr-2 mr-lg-2"></b-icon> Me déconnecter </a>
-              <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
-            </div>
-            <div class="option">
-              <a @click="openConfirm" class="nav_centrale delete_user underline"><b-icon icon="trash-fill" class="mr-2 mr-lg-2 delete_icon"></b-icon>Supprimer mon compte</a>
-            </div>
-          </div>
+  <aside class="profil_account bg-white sidebar">
+    <div class="sidebar__widget">
+      <div class="contanier_presentation bg-white border-b py-8">
+        <img v-if="currentUser" :src="currentUser.photoProfil"  class="avatar" alt="Avatar" ref="file" type="file" />
+        <img v-else src="//ssl.gstatic.com/accounts/ui/avatar_1x.png"  class="avatar" alt="Avatar" />
+        <h1 class="username">{{ currentUser.username }}</h1>
+        <p><strong>Membre depuis le :</strong> {{ getDateWithoutTime(currentUser.createdAt) }}</p>
+      </div>
+      <div class="optionsProfil bg-white">
+        <div class="option"> 
+          <router-link to="/profil" class="nav_centrale underline"><b-icon icon="person-circle" class="mr-2 mr-lg-2"></b-icon> Mon compte</router-link>
         </div>
-        <ConfirmDialogue
-          :reveal="revealConfirm"
-          :title="titleModal"
-          :action="action"
-          @closeConfirm="closeConfirm"
-          :userId="currentUser.id"
-          :message="message"
-        ></ConfirmDialogue>
-      </aside>
+        <div class="option">
+          <router-link to="/password" class="nav_centrale underline"><b-icon icon="pencil-square" class="mr-2 mr-lg-2"></b-icon> Modifier mot de passe</router-link>
+        </div>
+        <div class="option">
+          <a @click="logout" class="text-decoration-none underline"><b-icon icon="box-arrow-in-left" class="mr-2 mr-lg-2"></b-icon> Me déconnecter </a>
+          <confirm-dialogue ref="confirmDialogue"></confirm-dialogue>
+        </div>
+        <div class="option">
+          <a @click="openConfirm" class="nav_centrale delete_user underline"><b-icon icon="trash-fill" class="mr-2 mr-lg-2 delete_icon"></b-icon>Supprimer mon compte</a>
+        </div>
+      </div>
+    </div>
+    <ConfirmDialogue
+      :reveal="revealConfirm"
+      :title="titleModal"
+      :action="action"
+      @closeConfirm="closeConfirm"
+      :userId="currentUser.id"
+      :message="message"
+    ></ConfirmDialogue>
+  </aside>
 </template>
 <script>
 import { mapActions } from 'vuex'
@@ -39,24 +39,24 @@ import router from "../router";
 import ConfirmDialogue from "../components/ConfirmDialogue.vue";
 import AuthService from "../service/auth.resource"
 export default {
-    name: 'AsideProfil',
-    data() {
-      return {
-        user: {},
-        revealConfirm: false,
-        titleModal: "",
-        action: "",
-        message:"",
-        currentUser: {}
-      }
-    },
-    components: {
-      ConfirmDialogue
-    },
-    async mounted() {
-      this.currentUser = await AuthService.getCurrentUser()
-    },
-    methods: {
+  name: 'AsideProfil',
+  data() {
+    return {
+      user: {},
+      revealConfirm: false,
+      titleModal: "",
+      action: "",
+      message:"",
+      currentUser: {}
+    }
+  },
+  components: {
+    ConfirmDialogue
+  },
+  async mounted() {
+    this.currentUser = await AuthService.getCurrentUser()
+  },
+  methods: {
     ...mapActions(['displayNotification']),
       
     logout() {
@@ -66,18 +66,21 @@ export default {
         router.push('/');
       })
     },
+
     openConfirm() {
       this.revealConfirm = true;
       this.titleModal = "Suppression du compte";
       this.message = "Cette action est irréversible. Cela supprimera automatiquement tous vos posts et commentaires.. Êtes-vous sûr de vouloir supprimer votre compte ?";
       this.action = 'deleteUser';
     },
+
     closeConfirm(e) {
       if(e.target === e.currentTarget) {
         this.revealConfirm = false;
         this.displayNotification("Le compte n'a pas été supprimé !")
       }
     },
+
     getDateWithoutTime(date) {
       return require("moment")(date).format("DD-MM-YYYY");
     },
@@ -109,12 +112,12 @@ h1 {
   border-color: #fff;
 }
 .profil_account {
-    padding: 4rem;
-    border-right-width: 1px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    border-color: rgba(231, 233, 244);
+  padding: 4rem;
+  border-right-width: 1px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-color: rgba(231, 233, 244);
 }
 .delete_user {
   color: #e22600
@@ -123,29 +126,29 @@ h1 {
   color: #e22600;
 }
 .option {
-    display: flex;
-    text-align: center;
-    align-items: left;
-    font-family: 'Barlow', sans-serif;
-    font-size: 15px;
-    border-radius: 2rem;
-    border: solid 0.15rem #fff;
-    background-color: #fff;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: left;
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  border-radius: 2rem;
+  border: solid 0.15rem #fff;
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
 a {
-    text-decoration: none;
-    color:#242424;
-    font-size : 1rem;
-    font-weight: bold;
-    cursor: pointer;
+  text-decoration: none;
+  color:#242424;
+  font-size : 1rem;
+  font-weight: bold;
+  cursor: pointer;
 }
 a:hover{
-    color: #e22600;
-    cursor: pointer;
-    text-decoration: none;
+  color: #e22600;
+  cursor: pointer;
+  text-decoration: none;
 }
 .icon {
   padding-right: 0.7rem;

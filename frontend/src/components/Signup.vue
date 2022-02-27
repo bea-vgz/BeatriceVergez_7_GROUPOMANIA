@@ -1,51 +1,45 @@
 <template>
-
-<div id="signupUser">
-
+  <div id="signupUser">
     <section class="container_intro">
-
       <div class="identity">
         <img src="../assets/groupomania_logo.png" alt="Groupomania"/>
         <h1>Bienvenue sur votre réseau social !</h1>
         <p>- Inscrivez-vous et échangez avec vos collègues 🤓 🖥️ -</p>
       </div>
-
     </section>
     <form class="formulaire" @submit.prevent="signup">
-        <h2>S'inscrire</h2>
-    <!-- Username input -->
-        <label for="username"> 👤 Pseudo * : </label>
-        <input type="text" id="username" v-model="user.username" placeholder="Pseudo" required="required">
-
-    <!-- Email input -->
-        <label for="email"> 📧  Email * : </label>
-        <div class="d-flex">
-          <input type="text" name="email" id="email" v-model="user.email" autocomplete="email" placeholder="Email (pseudo)" required="required" >
-          <span class="input-group-text">@groupomania.com</span>
-        </div>
-    <!-- Password input -->
-        <label for="password"> 🔒  Mot de passe * : 
-          <button type="button" class="buttonEyes" @click="show = !show" >
-            <font-awesome-icon icon="eye" alt="mot de passe visible" class="eyes text-color" v-show="show" />
-            <font-awesome-icon icon="eye-slash" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
-          </button>
-        </label>
-        <input id="password" name="password" v-model="user.password" placeholder="Mot de passe" required="required" :type="show ? 'text' : 'password'"/>
-
-    <!-- Bio input -->
-        <label for="bio"> 💬  Biographie : </label>
-        <input type="bio" id="bio" v-model="user.bio" placeholder="Quelques mots sur vous : âge, message, poste...">
-
-        <p class="champs"><strong>Les champs indiqués par une * sont obligatoires</strong></p>
-        
-        <button class="buttonInsc" type="submit" value="Submit">
-            <strong>S'inscrire</strong>
+      <h2>S'inscrire</h2>
+      <!-- Username -->
+      <label for="username"> 👤 Pseudo * : </label>
+      <input type="text" id="username" v-model="user.username" placeholder="Pseudo" required="required">
+      <!-- Email -->
+      <label for="email"> 📧  Email * : </label>
+      <div class="d-flex">
+        <input type="text" name="email" id="email" v-model="user.email" autocomplete="email" placeholder="Email (pseudo)" required="required" >
+        <span class="input-group-text">@groupomania.com</span>
+      </div>
+      <!-- Password -->
+      <label for="password"> 🔒  Mot de passe * : 
+        <button type="button" class="buttonEyes" @click="show = !show" >
+          <b-icon icon="eye-fill" alt="mot de passe visible" class="eyes text-color" v-show="show" />
+          <b-icon icon="eye-slash-fill" alt="mot de passe invisible" class="eyes text-color" v-show="!show" />
         </button>
-        
-        <button type="submit" value="Submit" class="buttonCompte" >
-            <router-link style="text-decoration: none; color: inherit;" to="/"> Déjà un compte ? </router-link>
-        </button>
+      </label>
+      <input id="password" name="password" v-model="user.password" placeholder="Mot de passe" required="required" :type="show ? 'text' : 'password'"/>
+      <!-- Bio -->
+      <label for="bio"> 💬  Biographie : </label>
+      <input type="bio" id="bio" v-model="user.bio" placeholder="Quelques mots sur vous : âge, message, poste...">
 
+      <p class="champs"><strong>Les champs indiqués par une * sont obligatoires</strong></p>
+
+      <!-- Button d'inscription -->
+      <button class="buttonInsc" type="submit" value="Submit">
+        <strong>S'inscrire</strong>
+      </button>
+      <!-- Link vers la page de connexion -->
+      <button type="submit" value="Submit" class="buttonCompte" >
+        <router-link style="text-decoration: none; color: inherit;" to="/"> Déjà un compte ? </router-link>
+      </button>
     </form>
   </div>
 </template>
@@ -55,17 +49,16 @@ import router from "../router";
 import User from '../models/user'
 import { mapActions } from 'vuex'
 export default {
-    name: 'Signup',
-    components: {
-    },
-    data () {
-        return {
-          user: new User('', '', '', '', '', ''),
-          show: false
-        }
-    },
-    methods: {
+  name: 'Signup',
+  data () {
+    return {
+      user: new User('', '', '', '', '', ''),
+      show: false
+    }
+  },
+  methods: {
     ...mapActions(['displayNotification']),
+
     signup() {
       this.$store.dispatch('auth/signup', this.user)
       .then(data => {
@@ -214,7 +207,6 @@ input {
     margin: 0;
   }
 }
-
 @media screen and (min-width: 780px) and (max-width: 1180px) {
   #signupUser {
     display: flex;
