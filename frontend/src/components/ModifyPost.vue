@@ -81,7 +81,7 @@ export default {
     onFileSelected(file) {
       this.image = file;
     },
-
+    
     modifyPost(){
       const post = new FormData();
       post.append('image', this.image);
