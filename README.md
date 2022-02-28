@@ -18,7 +18,7 @@ __
 __
 
 **Frontend :** 
-***Application VueJS & Framework Bootstrap-Vue***
+***Application VueJS & Bootstrap-Vue***
 
 cd frontend / npm install / npm run serve
 
